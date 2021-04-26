@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Noto+Sans:wght@400;700&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 body {
@@ -33,7 +37,7 @@ div.login {
 h1 {
   height: 51px;
   margin: 22px auto 12px auto;
-  font-family: 'Lobster', 'cursive';
+  font-family: 'Courgette', cursive;
   font-size: 42px;
   text-align: center;
 }
@@ -177,6 +181,7 @@ a.forgotPw {
 }
 
 .facebook > span {
+  margin-left: 6px;
   color: rgb(56, 81, 133);
   font-size: 14px;
   font-weight: bold;
@@ -206,6 +211,7 @@ div.create-account {
 }
 
 .create-account > p > a {
+  margin-left: 6px;
   color: rgb(0, 149, 246);
   font-weight: bold;
   text-decoration: none;
