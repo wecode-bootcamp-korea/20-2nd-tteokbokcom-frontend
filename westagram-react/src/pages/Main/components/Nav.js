@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { search } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { search } from "@fortawesome/free-solid-svg-icons";
 
-library.add()
+library.add();
 
 class Component extends React.Component {
   render() {
@@ -16,8 +16,8 @@ class Component extends React.Component {
         />
         <div className="searchBar">
           <input type="text" name="search" id="search" placeholder="검색" />
-          <label className="search" for="search">
-            <FontAwesomeIcon icon={['fas', 'search']} />
+          <label className="search" htmlFor="search">
+            <FontAwesomeIcon icon={["fas", "search"]} />
           </label>
         </div>
         <div className="linksOfMenu">
@@ -45,8 +45,8 @@ class Component extends React.Component {
           </a>
         </div>
       </nav>
-    )
+    );
   }
 }
 
-export default Component
+export default Component;
