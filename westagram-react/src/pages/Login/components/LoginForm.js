@@ -39,7 +39,7 @@ class Component extends React.Component {
             required
           />
         </div>
-        <button type="submit" className="login btn" disabled>
+        <button type="submit" className="login btn" disabled onClick>
           로그인
         </button>
         <div className="loginOption">

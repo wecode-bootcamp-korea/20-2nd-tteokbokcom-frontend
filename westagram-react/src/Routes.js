@@ -1,7 +1,7 @@
-import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Login from './pages/Login/Login'
-import Main from './pages/Main/Main'
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Login from "./pages/Login/Login";
+import Main from "./pages/Main/Main";
 
 class Routes extends React.Component {
   render() {
@@ -12,8 +12,8 @@ class Routes extends React.Component {
           <Route exact path="/main" component={Main} />
         </Switch>
       </Router>
-    )
+    );
   }
 }
 
-export default Routes
+export default Routes;

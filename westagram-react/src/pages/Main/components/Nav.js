@@ -1,5 +1,5 @@
 import React from "react";
-
+import { withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { search } from "@fortawesome/free-solid-svg-icons";
@@ -7,12 +7,17 @@ import { search } from "@fortawesome/free-solid-svg-icons";
 library.add();
 
 class Component extends React.Component {
+  goToLogin = () => {
+    this.props.history.push("/");
+  };
+
   render() {
     return (
       <nav>
         <img
           alt="logo"
           src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png"
+          onClick={this.goToLogin}
         />
         <div className="searchBar">
           <input type="text" name="search" id="search" placeholder="검색" />
@@ -49,4 +54,4 @@ class Component extends React.Component {
   }
 }
 
-export default Component;
+export default withRouter(Component);
