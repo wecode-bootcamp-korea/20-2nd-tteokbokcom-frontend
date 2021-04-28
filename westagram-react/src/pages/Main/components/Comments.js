@@ -1,8 +1,9 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import "./Comments.scss";
 
-class Component extends React.Component {
+class Comments extends React.Component {
   render() {
     return (
       <div className="comments">
@@ -31,8 +32,8 @@ class Component extends React.Component {
           </button>
         </form>
       </div>
-    )
+    );
   }
 }
 
-export default Component
+export default Comments;

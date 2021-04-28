@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 
-class Component extends React.Component {
+class Recommendation extends React.Component {
   render() {
     return (
       <div className="recommendation">
@@ -14,8 +14,8 @@ class Component extends React.Component {
         </div>
         <button aria-label="팔로우">팔로우</button>
       </div>
-    )
+    );
   }
 }
 
-export default Component
+export default Recommendation;

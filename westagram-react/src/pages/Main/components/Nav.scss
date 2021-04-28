@@ -1,0 +1,106 @@
+nav {
+  & {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 54px;
+    border-top: 1px solid rgb(219, 219, 219);
+    border-bottom: 1px solid rgb(219, 219, 219);
+    border-radius: 1px;
+    background-color: #fafafa;
+  }
+
+  & > img {
+    width: 103px;
+    height: 29px;
+    margin-left: 20px;
+  }
+
+  label {
+    cursor: text;
+  }
+
+  .searchBar {
+    position: relative;
+
+    & > input {
+      position: relative;
+      width: 215px;
+      height: 28px;
+      padding-left: 25px;
+      background-color: #fafafa;
+      border-radius: 4px;
+      border: 1px solid rgb(219, 219, 219);
+      outline: none;
+    }
+
+    .search {
+      position: absolute;
+      left: 45%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: rgb(142, 142, 142);
+      font-size: 14px;
+      font-weight: 300;
+    }
+
+    #search::placeholder {
+      transform: translateX(40%);
+    }
+
+    .fas {
+      font-size: 10px;
+      color: rgb(142, 142, 142);
+      margin-right: 4px;
+    }
+
+    #search:focus::placeholder {
+      transform: none;
+    }
+
+    &:focus-within .fas {
+      transform: translateX(-76px);
+    }
+  }
+
+  .linksOfMenu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 222px;
+    height: 22px;
+  }
+
+  .linksOfMenu > a {
+    margin-right: 20px;
+    width: 22px;
+    height: 22px;
+    border: none;
+    border-radius: 50%;
+  }
+
+  .linksOfMenu i {
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 23px;
+  }
+
+  .linksOfMenu i:hover {
+    color: rgb(0, 0, 0);
+  }
+
+  .linksOfMenu > button {
+    padding: 0;
+    margin-right: 20px;
+  }
+
+  .linksOfMenu img {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid rgb(219, 219, 219);
+  }
+}

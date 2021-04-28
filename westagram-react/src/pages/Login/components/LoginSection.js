@@ -1,5 +1,6 @@
-import React from 'react'
-import LoginForm from './LoginForm'
+import React from "react";
+import LoginForm from "./LoginForm";
+import "./LoginSection.scss";
 
 class Component extends React.Component {
   render() {
@@ -11,8 +12,8 @@ class Component extends React.Component {
           비밀번호를 잊으셨나요?
         </a>
       </div>
-    )
+    );
   }
 }
 
-export default Component
+export default Component;

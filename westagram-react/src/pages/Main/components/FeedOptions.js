@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import "./FeedOptions.scss";
 
 // let [likes, addLikes] = useState(0)
 
-// class Component extends React.Component {
+// class FeedOptions extends React.Component {
 
 //   render() {
 //     return (
@@ -31,7 +32,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons'
 //   }
 // }
 
-class Component extends React.Component {
+class FeedOptions extends React.Component {
   render() {
     return (
       <section className="feedOptions">
@@ -49,8 +50,8 @@ class Component extends React.Component {
           <FontAwesomeIcon icon={faHeart} />
         </button>
       </section>
-    )
+    );
   }
 }
 
-export default Component
+export default FeedOptions;

@@ -1,10 +1,11 @@
-import React from 'react'
-import UserProfileBox from './UserProfileBox'
-import RecommendTitle from './RecommendTitle'
-import Recommendation from './Recommendation.js'
-import Footer from './Footer'
+import React from "react";
+import UserProfileBox from "./UserProfileBox";
+import RecommendTitle from "./RecommendTitle";
+import Recommendation from "./Recommendation.js";
+import Footer from "./Footer";
+import "./MainRight.scss";
 
-class Component extends React.Component {
+class MainRight extends React.Component {
   render() {
     return (
       <aside className="main-right">
@@ -16,8 +17,8 @@ class Component extends React.Component {
         <Recommendation />
         <Footer />
       </aside>
-    )
+    );
   }
 }
 
-export default Component
+export default MainRight;

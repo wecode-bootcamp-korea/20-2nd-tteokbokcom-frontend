@@ -1,14 +1,15 @@
-import React from 'react'
+import React from "react";
+import "./Story.scss";
 
-class Component extends React.Component {
+class Story extends React.Component {
   render() {
     return (
       <li className="story">
         <div className="userPic"></div>
         <p>user name</p>
       </li>
-    )
+    );
   }
 }
 
-export default Component
+export default Story;

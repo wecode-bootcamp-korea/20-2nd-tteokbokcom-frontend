@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 
-class Component extends React.Component {
+class UserProfileBox extends React.Component {
   render() {
     return (
       <div className="userProfileBox">
@@ -14,8 +14,8 @@ class Component extends React.Component {
         </div>
         <button aria-label="계정 전환">전환</button>
       </div>
-    )
+    );
   }
 }
 
-export default Component
+export default UserProfileBox;

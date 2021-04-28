@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 
-class Component extends React.Component {
+class Footer extends React.Component {
   render() {
     return (
       <footer>
@@ -10,8 +10,8 @@ class Component extends React.Component {
         </div>
         <div className="copyright">© 2021 INSTAGRAM FROM FACEBOOK</div>
       </footer>
-    )
+    );
   }
 }
 
-export default Component
+export default Footer;

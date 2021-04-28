@@ -1,8 +1,9 @@
-import React from 'react'
-import StoryBox from './StoryBox'
-import Article from './Article'
+import React from "react";
+import StoryBox from "./StoryBox";
+import Article from "./Article";
+import "./Feeds.scss";
 
-class Component extends React.Component {
+class Feeds extends React.Component {
   render() {
     return (
       <div className="feeds">
@@ -10,8 +11,8 @@ class Component extends React.Component {
         <Article />
         <Article />
       </div>
-    )
+    );
   }
 }
 
-export default Component
+export default Feeds;

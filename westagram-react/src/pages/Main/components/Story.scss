@@ -1,0 +1,15 @@
+.story {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 16px 10px;
+  width: 66px;
+
+  &:nth-child(1) {
+    margin-left: 20px;
+  }
+
+  & > p {
+    font-size: 12px;
+  }
+}

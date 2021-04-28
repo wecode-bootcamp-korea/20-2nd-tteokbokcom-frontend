@@ -1,4 +1,5 @@
-import React from 'react'
+import React from "react";
+import "./CreateAccount.scss";
 
 class Component extends React.Component {
   render() {
@@ -11,8 +12,8 @@ class Component extends React.Component {
           </a>
         </p>
       </div>
-    )
+    );
   }
 }
 
-export default Component
+export default Component;

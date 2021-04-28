@@ -3,10 +3,11 @@ import { withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { search } from "@fortawesome/free-solid-svg-icons";
+import "./Nav.scss";
 
 library.add();
 
-class Component extends React.Component {
+class Nav extends React.Component {
   goToLogin = () => {
     this.props.history.push("/");
   };
@@ -54,4 +55,4 @@ class Component extends React.Component {
   }
 }
 
-export default withRouter(Component);
+export default withRouter(Nav);

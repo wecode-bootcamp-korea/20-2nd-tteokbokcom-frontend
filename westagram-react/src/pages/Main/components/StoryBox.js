@@ -1,7 +1,8 @@
-import React from 'react'
-import Story from './Story'
+import React from "react";
+import Story from "./Story";
+import "./StoryBox.scss";
 
-class Component extends React.Component {
+class StoryBox extends React.Component {
   render() {
     return (
       <ul className="storyBox">
@@ -15,8 +16,8 @@ class Component extends React.Component {
         <Story />
         <Story />
       </ul>
-    )
+    );
   }
 }
 
-export default Component
+export default StoryBox;

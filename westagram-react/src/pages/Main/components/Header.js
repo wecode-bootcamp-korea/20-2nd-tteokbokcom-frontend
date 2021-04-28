@@ -1,6 +1,7 @@
-import React from 'react'
+import React from "react";
+import "./Header.scss";
 
-class Component extends React.Component {
+class Header extends React.Component {
   render() {
     return (
       <header>
@@ -12,8 +13,8 @@ class Component extends React.Component {
           <div></div>
         </button>
       </header>
-    )
+    );
   }
 }
 
-export default Component
+export default Header;
