@@ -17,7 +17,6 @@ const GlobalStyles = createGlobalStyle`
     padding:0;
     box-sizing:border-box;
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';
-    color: red;
     font: inherit;
   }
 
