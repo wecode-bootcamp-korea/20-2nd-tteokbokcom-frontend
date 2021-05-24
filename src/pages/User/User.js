@@ -1,14 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 
-function mapStateToProps(state) {
-  return {};
+function User() {
+  return <></>;
 }
 
-class User extends Component {
-  render() {
-    return <div></div>;
-  }
-}
-
-export default connect(mapStateToProps)(User);
+export default User;

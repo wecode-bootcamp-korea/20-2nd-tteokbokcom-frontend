@@ -9,7 +9,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   html{
-      font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
   }
 
   *{
@@ -18,8 +18,8 @@ const GlobalStyles = createGlobalStyle`
     box-sizing:border-box;
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';
     color: red;
+    font: inherit;
   }
-
 
   body{
     @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
@@ -27,17 +27,20 @@ const GlobalStyles = createGlobalStyle`
     background-color: white;
   }
 
-ul,
+  ul,
   ol {
     list-style: none;
   }
+
   a,
   a:visited {
     text-decoration: none;
   }
+
   *:focus {
     outline: none;
   }
+
   button {
     border: none;
     outline: none;
@@ -45,10 +48,7 @@ ul,
     background: none;
     cursor: pointer;
   }
-  * {
-    box-sizing: border-box;
-    font: inherit;
-  }
+
   `;
 
 export default GlobalStyles;

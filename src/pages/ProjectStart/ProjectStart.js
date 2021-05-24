@@ -1,14 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 
-function mapStateToProps(state) {
-  return {};
+function ProjectStart() {
+  return <></>;
 }
 
-class ProjectStart extends Component {
-  render() {
-    return <div></div>;
-  }
-}
-
-export default connect(mapStateToProps)(ProjectStart);
+export default ProjectStart;

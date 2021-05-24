@@ -1,14 +1,6 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 
-function mapStateToProps(state) {
-  return {};
+function Join() {
+  return <></>;
 }
-
-class Join extends Component {
-  render() {
-    return <div></div>;
-  }
-}
-
-export default connect(mapStateToProps)(Join);
+export default Join;
