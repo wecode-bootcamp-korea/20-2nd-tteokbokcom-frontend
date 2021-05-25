@@ -9,12 +9,13 @@ import validator from '../../utills/validator';
 function Detail() {
   const [detailInfo, setDetailInfo] = useState({});
   const [showReward, setShowReward] = useState(false);
-  const [closeReward, setCloseReward] = useState(false);
-  // const [activeScroll, setActiveScroll] = useState();
   const params = useParams();
+  const { id } = params;
 
   useEffect(() => {
-    fetch(`${API.PROJECT_START}/${params.id}`)
+    fetch(`${API.MAIN}/${id}`, {
+      headers: { Authorization: localStorage.getItem('token') },
+    })
       .then(res => res.json())
       .then(res => {
         setDetailInfo(res.result);
@@ -24,10 +25,6 @@ function Detail() {
   const activeReward = () => {
     setShowReward(!showReward);
   };
-
-  // const activeScrollBtn = () => {
-  //   setActiveScroll(!window.pageYOffset > 0);
-  // };
 
   if (validator.isEmptyObject(detailInfo)) return <div>Loading...</div>;
 
@@ -44,8 +41,6 @@ function Detail() {
         detailInfo={detailInfo}
         showReward={showReward}
         setShowReward={setShowReward}
-        closeReward={closeReward}
-        setCloseReward={setCloseReward}
         activeReward={activeReward}
       />
     </>

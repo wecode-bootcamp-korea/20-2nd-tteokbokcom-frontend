@@ -3,13 +3,8 @@ import RewardContents from './RewardContents';
 import RewardContentsMobile from './RewardContentsMobile';
 import styled from 'styled-components';
 
-function DetailProduct({
-  detailInfo,
-  showReward,
-  closeReward,
-  setCloseReward,
-  activeReward,
-}) {
+function DetailProduct({ detailInfo, showReward, activeReward }) {
+  const profile_img = detailInfo.creater_profile_image;
   return (
     <ProductWrapper>
       <ProductContentsBox>
@@ -26,7 +21,7 @@ function DetailProduct({
             <CreatorTitle>
               <img
                 alt="profileImage"
-                src={`${detailInfo.creater_profile_image} || ../../../images/user.png`}
+                src={profile_img ? profile_img : '../../../images/user.png'}
               />
               <p>{detailInfo.creater}</p>
             </CreatorTitle>
@@ -43,8 +38,6 @@ function DetailProduct({
             funding_option={detailInfo.funding_option}
             project_id={detailInfo.id}
             showReward={showReward}
-            closeReward={closeReward}
-            setCloseReward={setCloseReward}
             activeReward={activeReward}
           />
         </RewardBox>

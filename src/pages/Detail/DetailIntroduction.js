@@ -4,7 +4,11 @@ import Button from '../../components/Button/Button';
 import { API } from '../../config';
 import styled from 'styled-components';
 
-function DetailIntroduction({ detailInfo, activeReward, activeScrollBtn }) {
+function DetailIntroduction({ detailInfo, activeReward }) {
+  const [fillHeart, setFillHeart] = useState(detailInfo.is_liked);
+  const params = useParams();
+  const profile_img = detailInfo.creater_profile_image;
+
   const leftDays = () => {
     const lastDayMillisec = new Date(detailInfo.end_date).getTime();
     const now = Date.now();
@@ -18,27 +22,38 @@ function DetailIntroduction({ detailInfo, activeReward, activeScrollBtn }) {
     return Math.floor((current / target) * 10000);
   };
 
-  const params = useParams();
-  const [fillHeart, setFillHeart] = useState(detailInfo.is_liked);
   const sendLike = e => {
-    fetch(`${API.PROJECT_START}/${params.id}`, {
+    fetch(`${API.MAIN}/${params.id}`, {
       method: 'PATCH',
-      header: { Authorization: localStorage.getItem('token') },
+      headers: { Authorization: localStorage.getItem('token') },
     }).then(res => {
       if (res.ok) {
         setFillHeart(!fillHeart);
-        alert('해당 프로젝트를 찜목록에 추가 하였습니다.');
       } else if (res.status === 401) {
         alert('로그인을 먼저 해주세요.');
       }
     });
   };
 
+  const categoryToKorean = category => {
+    switch (category) {
+      case 'kimbab':
+        return '김밥';
+      case 'rameon':
+        return '라면';
+      case 'soondae':
+        return '순대';
+      case 'fried':
+        return '튀김';
+      case 'tteokbok':
+        return '떡볶이';
+    }
+  };
   return (
     <IntroductionWrapper>
       <IntroHeader>
         <CategoryTitle>
-          <span>{detailInfo.category}</span>
+          <span>{categoryToKorean(detailInfo.category)}</span>
         </CategoryTitle>
         <ProjectTitle>
           <h1>{detailInfo.title}</h1>
@@ -46,7 +61,7 @@ function DetailIntroduction({ detailInfo, activeReward, activeScrollBtn }) {
         <CreatorProfile>
           <img
             alt="profileImage"
-            src={`${detailInfo.creater_profile_image} || ../../../images/user.png`}
+            src={profile_img ? profile_img : '../../../images/user.png'}
           />
           <p>{detailInfo.creater}</p>
         </CreatorProfile>
@@ -63,7 +78,7 @@ function DetailIntroduction({ detailInfo, activeReward, activeScrollBtn }) {
           </CollectedAmount>
           <LeftDate>
             <p>남은시간</p>
-            <h2>{leftDays() < 0 ? '종료되었습니다.' : `${leftDays()}일`}</h2>
+            <h2>{leftDays() < 0 ? '종료되었습니다' : `${leftDays()}일`}</h2>
           </LeftDate>
           <Sponsor>
             <p>후원자</p>
@@ -214,10 +229,10 @@ const CollectedAmount = styled.div`
     letter-spacing: 0.5px;
 
     span {
-      font-size: 1.2rem;
+      font-size: 0.9rem;
       margin-left: 10px;
       font-weight: bold;
-      color: #333333;
+      color: #666666;
     }
   }
 
