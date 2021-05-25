@@ -47,6 +47,9 @@ function DetailIntroduction({ detailInfo, activeReward }) {
         return '튀김';
       case 'tteokbok':
         return '떡볶이';
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        'category';
     }
   };
   return (
