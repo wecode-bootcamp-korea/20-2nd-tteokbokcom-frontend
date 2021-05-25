@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../../components/Button/Button';
 import { useHistory } from 'react-router-dom';
@@ -14,6 +15,7 @@ function RewardCard({
 }) {
   const [activePush, setActivePush] = useState(false);
   const history = useHistory();
+  const params = useParams();
 
   const activePushBtn = () => {
     setActivePush(!activePush);
