@@ -7,6 +7,7 @@ import Join from './pages/Join/Join';
 import CreateAccount from './pages/Join/CreateAccount';
 import ProjectStart from './pages/ProjectStart/ProjectStart';
 import User from './pages/User/User';
+import Detail from './pages/Detail/Detail';
 
 const Routes = () => {
   return (
@@ -19,6 +20,7 @@ const Routes = () => {
         <Route exact path="/createAccount" component={CreateAccount} />
         <Route exact path="/project-start" component={ProjectStart} />
         <Route exact path="/profile" component={User} />
+        <Route exact path="/detail/:id" component={Detail} />
       </Switch>
     </Router>
   );

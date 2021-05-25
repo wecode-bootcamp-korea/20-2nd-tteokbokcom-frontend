@@ -1,0 +1,42 @@
+{
+  "result": {
+    "id": 1,
+    "title_image_url": "https://tumblbug-pci.imgix.net/bcc5740643a75b7399f9d1452070eedc4788eca5/b9bb6578acd82bbc1f233547478fc408c0bbf94d/7219c09876c9178664b1a17ad9405a95514bbd41/ac4a81b2-9a10-4248-bb41-46e16fe4feb8.jpg?ixlib=rb-1.1.0&w=1240&h=930&auto=format%2Ccompress&lossless=true&fit=crop&s=b6e6be110af18c6b616bd122e3d71b0f",
+    "title": "프로젝트1",
+    "category": "카테고리1",
+    "creater": "testuser1",
+    "creater_profile_image": "https://tumblbug-pci.imgix.net/bcc5740643a75b7399f9d1452070eedc4788eca5/b9bb6578acd82bbc1f233547478fc408c0bbf94d/7219c09876c9178664b1a17ad9405a95514bbd41/ac4a81b2-9a10-4248-bb41-46e16fe4feb8.jpg?ixlib=rb-1.1.0&w=1240&h=930&auto=format%2Ccompress&lossless=true&fit=crop&s=b6e6be110af18c6b616bd122e3d71b0f",
+    "creater_introduction": "나야나1",
+    "summary": "돈내놔요 돈내놔",
+    "funding_amount": "3000.00",
+    "target_amount": "1000000.00",
+    "total_sponsor": 2,
+    "end_date": "2021-05-29T00:00:00",
+    "funding_option": [
+      {
+        "option_id": 1,
+        "amount": 1000.0,
+        "title": "상품 옵션1",
+        "description": "상품 구성1",
+        "remains": 10,
+        "selected_funding": 1
+      },
+      {
+        "option_id": 2,
+        "amount": 2000.0,
+        "title": "상품 옵션2",
+        "description": "상품 구성2",
+        "remains": 10,
+        "selected_funding": 1
+      },
+      {
+        "option_id": 3,
+        "amount": 3000.0,
+        "title": "상품 옵션3",
+        "description": "상품 구성3",
+        "remains": 10,
+        "selected_funding": 0
+      }
+    ]
+  }
+}

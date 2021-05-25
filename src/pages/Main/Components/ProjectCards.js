@@ -89,7 +89,7 @@ export default function ProjectCards({ getFilteredData }) {
       </ResultCounter>
       <CardContainer>
         {mainData.map(data => (
-          <ProjectCard data={data} key={data.id} id={data.id} />
+          <ProjectCard data={data} key={data.id} id={data.id + 60} />
         ))}
       </CardContainer>
       <MoreContainer>
