@@ -20,9 +20,10 @@ function RewardCard({
   };
 
   const pushThisProject = e => {
-    fetch(API.GIFT, {
+    fetch(`${API.MAIN}/${params.id}`, {
       method: 'PUT',
       body: JSON.stringify({ id: project_id, option_id: +e.target.name }),
+      headers: { Authorization: localStorage.getItem('token') },
     }).then(res => {
       if (res.ok) {
         goToUserPage();
