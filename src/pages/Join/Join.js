@@ -1,6 +1,6 @@
 import React from 'react';
 
 function Join() {
-  return <></>;
+  return <>아</>;
 }
 export default Join;

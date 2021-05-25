@@ -34,6 +34,7 @@ const posCenter = (type = 'absolute') => {
   position: ${type};
   top: 50%;
   left: 50%;
+  top: 50%
   transform: translate(-50%,-50%);
   `;
 };
@@ -41,6 +42,7 @@ const posCenter = (type = 'absolute') => {
 const colors = {
   red: '#f26462',
   black: 'rgb(61, 61, 61)',
+  white: '#FFF',
   primaryGray: '#3f4150',
   secondaryGray: '#8c8d96',
   tertiaryGray: '#b2b3b9',
