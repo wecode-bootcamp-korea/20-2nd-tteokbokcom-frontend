@@ -8,8 +8,8 @@ import media from './styles/media';
 
 ReactDOM.render(
   <>
-    <Globalstyle />
     <ThemeProvider theme={{ ...theme, ...media }}>
+      <Globalstyle />
       <Routes />
     </ThemeProvider>
   </>,
