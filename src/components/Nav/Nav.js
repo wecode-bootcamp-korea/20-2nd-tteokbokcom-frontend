@@ -39,6 +39,7 @@ const Container = styled.div`
   padding: 1rem 0;
   position: relative;
   height: 70px;
+
   ${({ theme }) => theme.desktop`
     height: 76px;
     width: 70%;
