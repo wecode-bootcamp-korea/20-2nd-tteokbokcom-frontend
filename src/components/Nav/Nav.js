@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 
 function Nav() {
@@ -19,8 +19,10 @@ function Nav() {
         <button type="button">
           <i class="fas fa-search"></i>
         </button>
-        <Link to="/login">로그인 / 회원가입</Link>
-        <UserProfile />
+        <Link to="/signin">
+          <span>로그인 / 회원가입</span>
+          <UserProfile />
+        </Link>
       </SearchAndLogin>
     </Container>
   );
@@ -87,7 +89,11 @@ const SearchAndLogin = styled.div`
     padding: 5px;
   }
 
-  & a {
+  & > a {
+    ${({ theme }) => theme.flexSet};
+  }
+
+  & span {
     display: none;
     font-size: 1rem;
     font-weight: 700;
@@ -103,6 +109,7 @@ const SearchAndLogin = styled.div`
 `;
 
 const UserProfile = styled.div`
+  display: inline-block;
   width: 28px;
   height: 28px;
   margin: 0 1rem;
