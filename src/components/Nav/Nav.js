@@ -10,8 +10,10 @@ function Nav() {
       {location.pathname === '/' && (
         <LinkGroup>
           <Link to="/">
-            <i class="fas fa-bars"></i>
-            <span>프로젝트 둘러보기</span>
+            <span>
+              <i className="fas fa-bars" />
+              프로젝트 둘러보기
+            </span>
           </Link>
           <Link to="/project-start">프로젝트 올리기</Link>
         </LinkGroup>
@@ -41,7 +43,7 @@ const Container = styled.div`
   height: 70px;
   ${({ theme }) => theme.desktop`
     height: 76px;
-    width: 1032px;
+    width: 70%;
     padding: 0.3rem 0;
     margin: 0px auto;
   `};
@@ -65,7 +67,7 @@ const LinkGroup = styled.div`
 
     i {
       position: relative;
-      bottom: 2px;
+      top: -0.5px;
       margin-right: 4px;
     }
 
