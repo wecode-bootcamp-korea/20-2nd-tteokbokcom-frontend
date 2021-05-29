@@ -10,10 +10,8 @@ function Nav() {
       {location.pathname === '/' && (
         <LinkGroup>
           <Link to="/">
-            <span>
-              <i className="fas fa-bars" />
-              프로젝트 둘러보기
-            </span>
+            <i className="fas fa-bars" />
+            <span>프로젝트 둘러보기</span>
           </Link>
           <Link to="/project-start">프로젝트 올리기</Link>
         </LinkGroup>
@@ -24,7 +22,7 @@ function Nav() {
       {location.pathname === '/' && (
         <SearchAndLogin>
           <button type="button">
-            <i class="fas fa-search"></i>
+            <i className="fas fa-search" />
           </button>
           <Link to="/signin">
             <span>로그인 / 회원가입</span>
