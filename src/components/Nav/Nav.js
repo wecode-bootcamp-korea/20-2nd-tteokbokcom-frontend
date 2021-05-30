@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import styled, { css } from 'styled-components/macro';
-import { Link, useLocation } from 'react-router-dom';
+import styled from 'styled-components/macro';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import { API } from '../../config';
 
 function Nav() {
   const location = useLocation();
+  const history = useHistory();
   const [user, setUser] = useState('');
   const [isShow, setIsShow] = useState(false);
 
@@ -15,6 +16,7 @@ function Nav() {
   const handleLogout = () => {
     alert('로그아웃 되었습니다.');
     localStorage.clear();
+    history.push('/');
   };
 
   const getUserInfo = () => {
@@ -28,8 +30,9 @@ function Nav() {
         });
   };
 
-  const isPathNameMain = location.pathname === '/';
-  const isPathNameMe = location.pathname === '/me';
+  const isSignin = location.pathname === '/signin';
+  const isSignup = location.pathname === '/signup';
+  const isCreateAccount = location.pathname === '/createaccount';
   const isLogin = !!localStorage.getItem('token');
 
   useEffect(() => {
@@ -38,11 +41,11 @@ function Nav() {
 
   return (
     <Container>
-      {(isPathNameMain || isPathNameMe) && (
+      {!(isSignin || isSignup || isCreateAccount) && (
         <LinkGroup>
           <Link to="/">
             <i className="fas fa-bars" />
-            <span>프로젝트 둘러보기</span>
+            <span> 프로젝트 둘러보기</span>
           </Link>
           <Link to="/project-start">프로젝트 올리기</Link>
         </LinkGroup>
@@ -50,10 +53,10 @@ function Nav() {
       <Link to="/">
         <Logo alt="logo" src="/images/logo.png" />
       </Link>
-      {(isPathNameMain || isPathNameMe) && (
+      {!(isSignin || isSignup || isCreateAccount) && (
         <SearchAndLogin>
           <button type="button">
-            <i className="fas fa-search" />
+            <i className="fas fa-search"></i>
           </button>
           {!isLogin ? (
             <Link to="/signin">
@@ -61,7 +64,7 @@ function Nav() {
               <UserProfile />
             </Link>
           ) : (
-            <Link to="/me">
+            <Link to="/profile">
               <span>{user.username}님</span>
               {!!user.profile_image_url ? (
                 <UserProfile
@@ -77,7 +80,7 @@ function Nav() {
           <ToggleMenu isShow={isShow} onMouseLeave={showMenu}>
             <MenuWrapper>
               <li>
-                <Link to="/me">🍄 마이페이지</Link>
+                <Link to="/profile">🍄 마이페이지</Link>
               </li>
               <li onClick={handleLogout}>👋 로그아웃</li>
             </MenuWrapper>
@@ -89,17 +92,11 @@ function Nav() {
 }
 
 const ToggleMenu = styled.div`
-  ${props =>
-    props.isShow
-      ? css`
-          display: block;
-        `
-      : css`
-          display: none;
-        `};
+  display: ${props => (props.isShow ? 'block' : 'none')};
   position: absolute;
   right: 10px;
   top: 40px;
+  z-index: 999;
   background-color: ${({ theme }) => theme.colors.black};
   color: white;
   border-radius: 4px;
@@ -176,7 +173,7 @@ const LinkGroup = styled.div`
 
     i {
       position: relative;
-      bottom: 2px;
+      /* bottom: 2px; */
       margin-right: 4px;
     }
 
