@@ -1,1 +1,13 @@
-[]
+{
+  "status": "SUCCESS",
+  "data": {
+    "user": {
+      "id": 1,
+      "username": "테스트",
+      "introduction": null,
+      "email": "test@gmail.com",
+      "profile_image_url": "",
+      "kakao_id": null
+    }
+  }
+}
