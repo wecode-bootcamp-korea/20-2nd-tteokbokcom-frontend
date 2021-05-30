@@ -2,6 +2,29 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { darken } from 'polished';
 
+function Button({
+  children,
+  color = 'white',
+  size = 'medium',
+  fontWeight = '400',
+  fullWidth,
+  outline,
+  ...rest
+}) {
+  return (
+    <StyledButton
+      color={color}
+      size={size}
+      outline={outline}
+      fullWidth={fullWidth}
+      fontWeight={fontWeight}
+      {...rest}
+    >
+      {children}
+    </StyledButton>
+  );
+}
+
 const colorStyles = css`
   ${({ theme, color }) => {
     const selected = theme.colors[color];
@@ -75,7 +98,7 @@ const StyledButton = styled.button`
   border: 1px solid rgb(230, 230, 230);
   border-radius: 4px;
   color: black;
-  cursor: pointer;
+  cursor: url('/images/spoon.png') 20 20, auto;
   padding-left: 1rem;
   padding-right: 1rem;
   margin-bottom: 0.6rem;
@@ -88,34 +111,5 @@ const StyledButton = styled.button`
 
   ${fullWidthStyle}
 `;
-
-function Button({
-  children,
-  color,
-  size,
-  fontWeight,
-  fullWidth,
-  outline,
-  ...rest
-}) {
-  return (
-    <StyledButton
-      color={color}
-      size={size}
-      outline={outline}
-      fullWidth={fullWidth}
-      fontWeight={fontWeight}
-      {...rest}
-    >
-      {children}
-    </StyledButton>
-  );
-}
-
-Button.defaultProps = {
-  color: 'white',
-  size: 'medium',
-  fontWeight: '400',
-};
 
 export default Button;

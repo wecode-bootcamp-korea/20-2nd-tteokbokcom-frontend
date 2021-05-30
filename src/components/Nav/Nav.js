@@ -1,13 +1,44 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React, { useState, useEffect } from 'react';
+import styled, { css } from 'styled-components/macro';
 import { Link, useLocation } from 'react-router-dom';
+import { API } from '../../config';
 
 function Nav() {
   const location = useLocation();
+  const [user, setUser] = useState('');
+  const [isShow, setIsShow] = useState(false);
+
+  const showMenu = () => {
+    setIsShow(prevState => !prevState);
+  };
+
+  const handleLogout = () => {
+    alert('로그아웃 되었습니다.');
+    localStorage.clear();
+  };
+
+  const getUserInfo = () => {
+    !!isLogin &&
+      fetch(`${API.USER}`, {
+        headers: { Authorization: localStorage.getItem('token') },
+      })
+        .then(res => res.json())
+        .then(res => {
+          res.status === 'SUCCESS' && setUser(res.data.user);
+        });
+  };
+
+  const isPathNameMain = location.pathname === '/';
+  const isPathNameMe = location.pathname === '/me';
+  const isLogin = !!localStorage.getItem('token');
+
+  useEffect(() => {
+    getUserInfo();
+  }, [isLogin]);
 
   return (
     <Container>
-      {location.pathname === '/' && (
+      {(isPathNameMain || isPathNameMe) && (
         <LinkGroup>
           <Link to="/">
             <i className="fas fa-bars" />
@@ -19,20 +50,99 @@ function Nav() {
       <Link to="/">
         <Logo alt="logo" src="/images/logo.png" />
       </Link>
-      {location.pathname === '/' && (
+      {(isPathNameMain || isPathNameMe) && (
         <SearchAndLogin>
           <button type="button">
             <i className="fas fa-search" />
           </button>
-          <Link to="/signin">
-            <span>로그인 / 회원가입</span>
-            <UserProfile />
-          </Link>
+          {!isLogin ? (
+            <Link to="/signin">
+              <span>로그인 / 회원가입</span>
+              <UserProfile />
+            </Link>
+          ) : (
+            <Link to="/me">
+              <span>{user.username}님</span>
+              {!!user.profile_image_url ? (
+                <UserProfile
+                  alt="profile"
+                  src={user.profile_image_url}
+                  onMouseEnter={showMenu}
+                />
+              ) : (
+                <UserProfile onMouseEnter={showMenu} />
+              )}
+            </Link>
+          )}
+          <ToggleMenu isShow={isShow} onMouseLeave={showMenu}>
+            <MenuWrapper>
+              <li>
+                <Link to="/me">🍄 마이페이지</Link>
+              </li>
+              <li onClick={handleLogout}>👋 로그아웃</li>
+            </MenuWrapper>
+          </ToggleMenu>
         </SearchAndLogin>
       )}
     </Container>
   );
 }
+
+const ToggleMenu = styled.div`
+  ${props =>
+    props.isShow
+      ? css`
+          display: block;
+        `
+      : css`
+          display: none;
+        `};
+  position: absolute;
+  right: 10px;
+  top: 40px;
+  background-color: ${({ theme }) => theme.colors.black};
+  color: white;
+  border-radius: 4px;
+
+  ${({ theme }) => theme.desktop`
+    top:50px
+`};
+`;
+
+const MenuWrapper = styled.ul`
+  ${({ theme }) => theme.flexColumnSet()};
+  & > li {
+    margin: 1rem;
+    cursor: pointer;
+    display: block;
+    width: 78px;
+    text-align: center;
+
+    ${({ theme }) => theme.desktop`
+      width: 100px;
+    `};
+
+    &:last-of-type {
+      margin-top: 0;
+    }
+  }
+
+  & a {
+    color: white;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 80%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent ${({ theme }) => theme.colors.black}
+      transparent;
+  }
+`;
 
 const Container = styled.div`
   ${({ theme }) => theme.flexSet('space-between')};
@@ -86,6 +196,7 @@ const LinkGroup = styled.div`
 
 const Logo = styled.img`
   width: 70px;
+  cursor: url('/images/face.png') 20 20, auto;
   ${({ theme }) => theme.posCenter()};
   ${({ theme }) => theme.desktop`
     width: 85px;
@@ -93,6 +204,7 @@ const Logo = styled.img`
 `;
 
 const SearchAndLogin = styled.div`
+  position: relative;
   ${({ theme }) => theme.flexSet('flex-end')}
   & button {
     padding: 5px;
@@ -117,7 +229,7 @@ const SearchAndLogin = styled.div`
   }
 `;
 
-const UserProfile = styled.div`
+const UserProfile = styled.img`
   display: inline-block;
   width: 28px;
   height: 28px;
