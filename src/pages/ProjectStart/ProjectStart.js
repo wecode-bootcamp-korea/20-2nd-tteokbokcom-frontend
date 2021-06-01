@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState, createContext, useContext, useEffect } from 'react';
 import ProjectStartCard from './Components/ProjectStartCard';
 import projectStartData from './data/projectStartData';
 import { API } from '../../config';
@@ -43,10 +43,23 @@ export default function ProjectStart() {
     end_date: '',
     reward_one: {},
     reward_two: {},
-    // img_data: {},
     project_img_data: {},
     profile_img_data: {},
   });
+
+  //유저 정보 받아와서 입력 폼에 입히기
+  useEffect(() => {
+    fetch('http://10.58.1.179:8000/projects')
+      .then(res => res.json())
+      .then(res =>
+        setForm({
+          ...form,
+          username: res['user_info']?.creater,
+          introduction: res['user_info']?.introduction,
+        })
+      )
+      .catch(err => console.log(err));
+  }, []);
 
   const {
     title,
@@ -60,7 +73,6 @@ export default function ProjectStart() {
     end_date,
     reward_one,
     reward_two,
-    // img_data,
     project_img_data,
     profile_img_data,
   } = form;
@@ -68,17 +80,12 @@ export default function ProjectStart() {
   const checkFirstTabValues =
     title && summary && category && username && introduction && tags.length > 0;
 
-  const checkRewardExists = () => {
-    if (
-      Object.keys(reward_one).length === 0 &&
-      Object.keys(reward_two).length === 0
-    )
-      return false;
-    else return true;
-  };
-
   const checkSecondTabValues =
-    checkRewardExists() && target_fund && launch_date && end_date;
+    Object.keys(reward_one).length > 0 &&
+    Object.keys(reward_two).length > 0 &&
+    target_fund &&
+    launch_date &&
+    end_date;
 
   const handleInput = e => {
     const { value, name } = e.target;
@@ -96,18 +103,15 @@ export default function ProjectStart() {
     if (name === '1') {
       setCurrentTabNum(1);
     }
-
-    // ToDo : 탭 이동시 카드아이템 오픈된거 끄기
   };
 
   const preventPost = () => {
     setIsDisabled(true);
   };
 
-  // ToDo : formInputData의 값들이 모두 존재할 때만 활성화
-  // if (checkFirstTabValues && checkSecondTabValues) {
-  //   setIsDisabled(false);
-  // }
+  if (checkFirstTabValues && checkSecondTabValues) {
+    setIsDisabled(false);
+  }
 
   const postForm = () => {
     post_form_data.append('info', JSON.stringify(form));
@@ -124,8 +128,6 @@ export default function ProjectStart() {
       .then(res => console.log(res))
       .catch(err => console.log(err));
   };
-
-  //To Do : go To Top 버튼
 
   return (
     <Container>
@@ -154,16 +156,25 @@ export default function ProjectStart() {
           펀딩 및 선물 구성
         </TabBtn>
       </Tab>
-      <Provider value={{ form, setForm, handleInput, preventPost }}>
+      <Provider
+        value={{
+          form,
+          setForm,
+          handleInput,
+          preventPost,
+        }}
+      >
         <EditorWrapper>
           {projectStartData[currentTabNum].categories.map(
-            ({ id, title, contents }) => (
-              <ProjectStartCard
-                key={id}
-                cardTitle={title}
-                cardData={contents}
-              />
-            )
+            ({ id, title, contents }) => {
+              return (
+                <ProjectStartCard
+                  key={id + title}
+                  cardTitle={title}
+                  cardData={contents}
+                />
+              );
+            }
           )}
         </EditorWrapper>
       </Provider>

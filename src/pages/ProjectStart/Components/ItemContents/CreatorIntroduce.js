@@ -4,7 +4,7 @@ import { useEditorContext } from '../../ProjectStart';
 import styled from 'styled-components/macro';
 
 export default function CreatorIntroduce() {
-  const { handleInput } = useEditorContext();
+  const { handleInput, form } = useEditorContext();
 
   return (
     <Editor
@@ -13,6 +13,7 @@ export default function CreatorIntroduce() {
       maxlength="50"
       placeholder="창작자 소개를 입력해주세요"
       rows="3"
+      value={form.introduction}
     />
   );
 }
