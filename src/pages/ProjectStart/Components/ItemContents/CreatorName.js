@@ -4,7 +4,7 @@ import { useEditorContext } from '../../ProjectStart';
 import styled from 'styled-components/macro';
 
 export default function CreatorName() {
-  const { handleInput } = useEditorContext();
+  const { handleInput, form } = useEditorContext();
 
   return (
     <Editor
@@ -12,6 +12,7 @@ export default function CreatorName() {
       type="text"
       placeholder="이름을 입력해주세요"
       name="username"
+      value={form.username}
     />
   );
 }
