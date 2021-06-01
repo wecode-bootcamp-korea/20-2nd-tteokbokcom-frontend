@@ -37,11 +37,11 @@ function User() {
   };
 
   const getPushList = () => {
-    fetch(`${API.MAIN}?liked`, {
+    fetch(`${API.MAIN}?donated`, {
       headers: { Authorization: localStorage.getItem('token') },
     })
       .then(res => res.json())
-      .then(pushData => setPushList(pushData.projects));
+      .then(pushData => setPushList(pushData.data.projects));
   };
 
   useEffect(() => {
