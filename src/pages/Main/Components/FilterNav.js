@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Button from '../../../components/Button/Button';
 import FilterWidjet from './FilterWidjet';
+import { useFilterContext } from '../Main';
 import styled from 'styled-components/macro';
+import { useHistory } from 'react-router-dom';
 
 const FILTER = [
   { key: 'category', value: '카테고리' },
@@ -11,6 +13,8 @@ const FILTER = [
 ];
 
 export default function FilterNav() {
+  const history = useHistory();
+  const { setFilterOption } = useFilterContext();
   const [isFilterOpen, setIsFilterOpen] = useState({
     category: false,
     status: false,
@@ -19,20 +23,23 @@ export default function FilterNav() {
   });
 
   const toggleFilter = e => {
-    const { id } = e.target;
+    const name = e.target.getAttribute('name');
     setIsFilterOpen({
       ...isFilterOpen,
-      [id]: !isFilterOpen[id],
+      [name]: !isFilterOpen[name],
     });
   };
 
   const resetFilter = () => {
-    setIsFilterOpen({
-      category: false,
-      status: false,
-      progress: false,
-      amount: false,
+    setFilterOption({
+      progressMin: 0,
+      progressMax: 0,
+      amountMin: 0,
+      amountMax: 0,
+      category: '',
+      status: '',
     });
+    history.push('/');
   };
 
   return (
@@ -40,7 +47,7 @@ export default function FilterNav() {
       <Wrapper>
         <FilterWrapper>
           {FILTER.map(({ key, value }) => (
-            <Filter onClick={toggleFilter} key={key} id={key}>
+            <Filter onClick={toggleFilter} key={key} id={key} name={key}>
               {value}
               <i
                 className={
@@ -85,6 +92,8 @@ const Wrapper = styled.div`
 `;
 
 const FilterWrapper = styled.div`
+  -webkit-tap-highlight-color: transparent;
+
   ${({ theme }) => theme.flexSet('flex-start')};
   cursor: pointer;
 `;
@@ -95,7 +104,10 @@ const Filter = styled(Button)`
   margin-bottom: 0;
   padding: 0 0.5em;
   color: ${({ theme }) => theme.colors.secondaryGray};
-
+  font-size: 0.85rem;
+  ${({ theme }) => theme.tablet`
+    font-size: 1rem;
+  `};
   &:last-of-type {
     margin-right: 0;
   }

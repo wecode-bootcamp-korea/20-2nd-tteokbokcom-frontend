@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
+import { useHistory, useParams } from 'react-router-dom';
 import Button from '../../components/Button/Button';
-import { useHistory } from 'react-router-dom';
 import { API } from '../../config';
+import styled from 'styled-components';
 
 function RewardCard({
   amount,

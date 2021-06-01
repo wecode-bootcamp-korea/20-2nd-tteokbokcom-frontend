@@ -8,6 +8,7 @@ import CreateAccount from './pages/Join/CreateAccount';
 import ProjectStart from './pages/ProjectStart/ProjectStart';
 import User from './pages/User/User';
 import Detail from './pages/Detail/Detail';
+import Footer from './components/AccountContainer/components/Footer';
 
 const Routes = () => {
   return (
@@ -22,6 +23,7 @@ const Routes = () => {
         <Route exact path="/profile" component={User} />
         <Route exact path="/detail/:id" component={Detail} />
       </Switch>
+      <Footer />
     </Router>
   );
 };

@@ -17,29 +17,9 @@ export default function Main() {
     status: '',
   });
 
-  //To Do : filter 값 쿼리파라미터로 data get 요청
-  const getFilteredData = () => {
-    const queryArr = [];
-    for (let i in filterOption) {
-      if (filterOption[i]) {
-        queryArr.push(i);
-      }
-    }
-    const queryStrings = queryArr.map(el => {
-      return `${el}=${filterOption[el]}`;
-    });
-    // console.log('/?' + queryString[0] + '&' + queryString[1]);
-    const query = '/?' + queryStrings[0] + '&' + queryStrings[1];
-
-    fetch(`API${query}`)
-      .then(res => res.json())
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-  };
-
   return (
     <Container>
-      <Provider value={{ filterOption, setFilterOption, getFilteredData }}>
+      <Provider value={{ filterOption, setFilterOption }}>
         <FilterNav />
         <Wrapper>
           <ProjectCards />

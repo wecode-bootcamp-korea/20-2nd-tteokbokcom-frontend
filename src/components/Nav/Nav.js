@@ -1,16 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components/macro';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { API } from '../../config';
+import { debounce } from 'lodash';
+import Input from '../../components/AccountContainer/components/Input';
+import styled from 'styled-components/macro';
 
 function Nav() {
   const location = useLocation();
   const history = useHistory();
   const [user, setUser] = useState('');
-  const [isShow, setIsShow] = useState(false);
+  const [isToggleMenuShow, setIsToggleMenuShow] = useState(false);
+  const [isSearched, setIsSearched] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
 
-  const showMenu = () => {
-    setIsShow(prevState => !prevState);
+  const toggleShowMenu = () => {
+    setIsToggleMenuShow(prevState => !prevState);
+  };
+
+  const showSearchBar = () => {
+    setIsSearched(prevState => !prevState);
+  };
+
+  const handleSearchInput = e => {
+    const { value } = e.target;
+    setSearchInput(value);
   };
 
   const handleLogout = () => {
@@ -36,64 +49,101 @@ function Nav() {
   const isLogin = !!localStorage.getItem('token');
 
   useEffect(() => {
+    searchInput ? history.push(`/?search=${searchInput}`) : history.push('/');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchInput]);
+
+  useEffect(() => {
     getUserInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLogin]);
 
   return (
     <Container>
-      {!(isSignin || isSignup || isCreateAccount) && (
-        <LinkGroup>
-          <Link to="/">
-            <i className="fas fa-bars" />
-            <span> 프로젝트 둘러보기</span>
-          </Link>
-          <Link to="/project-start">프로젝트 올리기</Link>
-        </LinkGroup>
-      )}
-      <Link to="/">
-        <Logo alt="logo" src="/images/logo.png" />
-      </Link>
-      {!(isSignin || isSignup || isCreateAccount) && (
-        <SearchAndLogin>
-          <button type="button">
-            <i className="fas fa-search"></i>
-          </button>
-          {!isLogin ? (
-            <Link to="/signin">
-              <span>로그인 / 회원가입</span>
-              <UserProfile />
+      <Header>
+        {!(isSignin || isSignup || isCreateAccount) && (
+          <LinkGroup>
+            <Link to="/">
+              <i className="fas fa-bars" />
+              <span> 프로젝트 둘러보기</span>
             </Link>
-          ) : (
-            <Link to="/profile">
-              <span>{user.username}님</span>
-              {!!user.profile_image_url ? (
+            <Link to="/project-start">프로젝트 올리기</Link>
+          </LinkGroup>
+        )}
+        <Link to="/">
+          <Logo alt="logo" src="/images/logo.png" />
+        </Link>
+        {!(isSignin || isSignup || isCreateAccount) && (
+          <SearchAndLogin>
+            <button type="button" onClick={showSearchBar}>
+              <i className="fas fa-search"></i>
+            </button>
+            {!isLogin ? (
+              <Link to="/signin">
+                <span>로그인 / 회원가입</span>
+                <UserProfile alt="profile" src="/images/user.png" />
+              </Link>
+            ) : (
+              <Link to="/profile">
+                <span>{user.username}님</span>
                 <UserProfile
                   alt="profile"
-                  src={user.profile_image_url}
-                  onMouseEnter={showMenu}
+                  src={user.profile_image_url || '/images/user.png'}
+                  onMouseEnter={toggleShowMenu}
                 />
-              ) : (
-                <UserProfile onMouseEnter={showMenu} />
-              )}
-            </Link>
-          )}
-          <ToggleMenu isShow={isShow} onMouseLeave={showMenu}>
-            <MenuWrapper>
-              <li>
-                <Link to="/profile">🍄 마이페이지</Link>
-              </li>
-              <li onClick={handleLogout}>👋 로그아웃</li>
-            </MenuWrapper>
-          </ToggleMenu>
-        </SearchAndLogin>
-      )}
+              </Link>
+            )}
+            <ToggleMenu
+              isToggleMenuShow={isToggleMenuShow}
+              onMouseLeave={toggleShowMenu}
+            >
+              <MenuWrapper>
+                <li>
+                  <Link to="/profile">🍄 마이페이지</Link>
+                </li>
+                <li onClick={handleLogout}>👋 로그아웃</li>
+              </MenuWrapper>
+            </ToggleMenu>
+          </SearchAndLogin>
+        )}
+      </Header>
+      <StyledInput
+        isSearched={isSearched}
+        onChange={debounce(handleSearchInput, 500)}
+        type="search"
+        placeholder="프로젝트 이름 또는 설명으로 검색할 수 있습니다 :)"
+      />
     </Container>
   );
 }
 
+const Container = styled.div`
+  ${({ theme }) => theme.flexColumnSet()};
+`;
+
+const StyledInput = styled(Input)`
+  display: ${props => (props.isSearched ? 'block' : 'none')};
+  margin: 1rem 1.5rem;
+  ${({ theme }) => theme.desktop`  width: 68%;`};
+`;
+
+const Header = styled.header`
+  ${({ theme }) => theme.flexSet('space-between')};
+  width: 100%;
+  padding: 1rem 0;
+  position: relative;
+  height: 70px;
+
+  ${({ theme }) => theme.desktop`
+    height: 76px;
+    width: 70%;
+    padding: 0.3rem 0;
+    margin: 0px auto;
+  `};
+`;
+
 const ToggleMenu = styled.div`
-  display: ${props => (props.isShow ? 'block' : 'none')};
+  display: ${props => (props.isToggleMenuShow ? 'block' : 'none')};
   position: absolute;
   right: 10px;
   top: 40px;
@@ -140,20 +190,6 @@ const MenuWrapper = styled.ul`
     border-color: transparent transparent ${({ theme }) => theme.colors.black}
       transparent;
   }
-`;
-
-const Container = styled.div`
-  ${({ theme }) => theme.flexSet('space-between')};
-  padding: 1rem 0;
-  position: relative;
-  height: 70px;
-
-  ${({ theme }) => theme.desktop`
-    height: 76px;
-    width: 70%;
-    padding: 0.3rem 0;
-    margin: 0px auto;
-  `};
 `;
 
 const LinkGroup = styled.div`
