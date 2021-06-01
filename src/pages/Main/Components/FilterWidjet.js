@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import Button from '../../../components/Button/Button';
 import { useFilterContext } from '../Main';
 import styled from 'styled-components/macro';
