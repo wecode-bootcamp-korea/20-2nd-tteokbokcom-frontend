@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Button from '../../../components/Button/Button';
 import { useFilterContext } from '../Main';
 import styled from 'styled-components/macro';
@@ -24,7 +24,7 @@ export default function FilterWidjet({
   getFilteredData,
 }) {
   const { filterOption, setFilterOption } = useFilterContext();
-  const [tempRange, setTempRange] = useState({
+  const tempRangeRef = useRef({
     progressMin: 0,
     progressMax: 0,
     amountMin: 0,
@@ -38,12 +38,13 @@ export default function FilterWidjet({
 
   const saveRangeOption = e => {
     const { value, name } = e.target;
-    setTempRange({ ...tempRange, [name]: value });
+    tempRangeRef.current[name] = value;
   };
 
   const updateFilterRange = e => {
     const { name } = e.target;
-    const { progressMax, progressMin, amountMax, amountMin } = tempRange;
+    const { progressMax, progressMin, amountMax, amountMin } =
+      tempRangeRef.current;
 
     if (name === 'progress') {
       setFilterOption({
