@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Filter from './Components/Filter';
 import Item from '../../components/ProjectCard/ProjectCard';
 import { debounce } from 'lodash';
+import { API } from '../../config';
 
 function User() {
   const [likeList, setLikeList] = useState([]);
@@ -27,13 +28,17 @@ function User() {
   );
 
   const getLikeList = () => {
-    fetch(`/data/User/likeData.json`)
+    fetch(`${API.MAIN}?liked`, {
+      headers: { Authorization: localStorage.getItem('token') },
+    })
       .then(res => res.json())
-      .then(likeData => setLikeList(likeData.projects));
+      .then(likeData => setLikeList(likeData.data.projects));
   };
 
   const getPushList = () => {
-    fetch(`/data/User/likeData.json`)
+    fetch(`${API.MAIN}?liked`, {
+      headers: { Authorization: localStorage.getItem('token') },
+    })
       .then(res => res.json())
       .then(pushData => setPushList(pushData.projects));
   };

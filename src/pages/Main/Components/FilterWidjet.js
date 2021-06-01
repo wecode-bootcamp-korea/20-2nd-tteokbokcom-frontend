@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '../../../components/Button/Button';
 import { useFilterContext } from '../Main';
 import styled from 'styled-components/macro';
@@ -12,7 +12,6 @@ const CATEGORY = [
 ];
 
 const STATUS = [
-  { option: '전체 프로젝트', id: 'whole' },
   { option: '진행중 프로젝트', id: 'ing' },
   { option: '공개예정 프로젝트', id: 'scheduled' },
   { option: '완료된 프로젝트', id: 'done' },
@@ -25,8 +24,12 @@ export default function FilterWidjet({
   getFilteredData,
 }) {
   const { filterOption, setFilterOption } = useFilterContext();
-
-  //To Do : filter
+  const [tempRange, setTempRange] = useState({
+    progressMin: 0,
+    progressMax: 0,
+    amountMin: 0,
+    amountMax: 0,
+  });
 
   const saveClickedOption = e => {
     const { id } = e.target;
@@ -35,11 +38,28 @@ export default function FilterWidjet({
 
   const saveRangeOption = e => {
     const { value, name } = e.target;
-    setFilterOption({ ...filterOption, [name]: value });
+    setTempRange({ ...tempRange, [name]: value });
   };
 
-  const createRangeQuery = e => {
-    getFilteredData();
+  const updateFilterRange = e => {
+    const { name } = e.target;
+    const { progressMax, progressMin, amountMax, amountMin } = tempRange;
+
+    if (name === 'progress') {
+      setFilterOption({
+        ...filterOption,
+        progressMax,
+        progressMin,
+      });
+    }
+
+    if (name === 'amount') {
+      setFilterOption({
+        ...filterOption,
+        amountMax,
+        amountMin,
+      });
+    }
   };
 
   return (
@@ -68,7 +88,12 @@ export default function FilterWidjet({
             />
           </FilterOption>
           <FilterOption>
-            <Button color="blue" fontWeight="700" onClick={createRangeQuery}>
+            <Button
+              color="blue"
+              fontWeight="700"
+              onClick={updateFilterRange}
+              name={condition}
+            >
               입력값 적용
             </Button>
           </FilterOption>
@@ -76,13 +101,23 @@ export default function FilterWidjet({
       )}
       {condition === 'category' &&
         CATEGORY.map(({ id, option }) => (
-          <FilterOptionAction onClick={saveClickedOption} id={id} key={id}>
+          <FilterOptionAction
+            onClick={saveClickedOption}
+            id={id}
+            key={id}
+            name={condition}
+          >
             {option}
           </FilterOptionAction>
         ))}
       {condition === 'status' &&
         STATUS.map(({ id, option }) => (
-          <FilterOptionAction onClick={saveClickedOption} id={id} key={id}>
+          <FilterOptionAction
+            onClick={saveClickedOption}
+            id={id}
+            key={id}
+            name={condition}
+          >
             {option}
           </FilterOptionAction>
         ))}

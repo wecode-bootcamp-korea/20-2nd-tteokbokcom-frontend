@@ -1,14 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Footer from './Footer';
 
 function Container({ children }) {
-  return (
-    <>
-      <StyledAccountContainer>{children}</StyledAccountContainer>
-      <Footer />
-    </>
-  );
+  return <StyledAccountContainer>{children}</StyledAccountContainer>;
 }
 
 const StyledAccountContainer = styled.main`

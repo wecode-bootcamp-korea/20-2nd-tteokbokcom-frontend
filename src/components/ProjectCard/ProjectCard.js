@@ -89,7 +89,7 @@ export default function ProjectCard({ data, id }) {
 const Container = styled.div`
   ${({ theme }) => theme.flexColumnSet('flex-start', 'stretch')};
   margin-bottom: 30px;
-  padding: 5px;
+  padding: 10px;
 
   ${({ theme }) => theme.desktop`
     padding: 10px;
