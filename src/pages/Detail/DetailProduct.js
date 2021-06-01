@@ -51,6 +51,7 @@ const ProductWrapper = styled.main`
   height: 100vh;
   padding-top: 15px;
   background-color: #f6f5f5;
+  z-index: 999;
 `;
 
 const ProductContentsBox = styled.section`

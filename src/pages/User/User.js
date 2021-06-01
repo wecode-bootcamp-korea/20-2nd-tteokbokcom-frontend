@@ -20,10 +20,11 @@ function User() {
 
   const { searchedLike, searchedPush } = searchInput;
 
-  const filteredLike = likeList.filter(item =>
+  const filteredLike = likeList?.filter(item =>
     item.title.includes(searchedLike)
   );
-  const filteredPush = pushList.filter(item =>
+
+  const filteredPush = pushList?.filter(item =>
     item.title.includes(searchedPush)
   );
 
@@ -66,12 +67,12 @@ function User() {
         <Title>내가 후원한 프로젝트</Title>
         <Filter
           handleSearchInput={debounce(handleSearchInput, 500)}
-          num={filteredPush.length}
+          num={filteredPush?.length}
           type="push"
           name="searchedPush"
         />
         <Box>
-          {filteredPush.map(item => {
+          {filteredPush?.map(item => {
             return <Item key={item.id} data={item} />;
           })}
         </Box>
