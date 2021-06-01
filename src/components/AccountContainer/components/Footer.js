@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/macro';
-import { Link } from 'react-router-dom';
 
 const TEAM = [
   {
@@ -46,7 +45,7 @@ export default function Footer() {
         <Back>
           <div>🌈 Thanks to ✨</div>
           {TEAM.map(mem => (
-            <li>
+            <li key={mem.name}>
               <a href={mem.url} target="blank" rel="noreferrer">
                 <span>{mem.name}</span>
                 <span>{mem.role}</span>
