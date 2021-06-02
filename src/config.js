@@ -5,5 +5,6 @@ export const API = {
   SIGNUP: `${HOST}/users/signup`,
   KAKAO: `${HOST}/users/signin/kakao`,
   USER: `${HOST}/users/me`,
-  PROJECT_START: `${HOST}/projects`,
+  // PROJECT_START: `${HOST}/projects`,
+  MAIN: `${HOST}/projects`,
 };
