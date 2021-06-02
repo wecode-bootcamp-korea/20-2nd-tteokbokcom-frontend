@@ -16,7 +16,7 @@ export default function ProjectCard({ data, id }) {
   const countDday = () => {
     const endMilliseconds = new Date(data['end_date']).getTime();
     const now = Date.now();
-    const dDay = Math.floor((endMilliseconds - now) / 1000 / 60 / 60 / 12);
+    const dDay = Math.floor((endMilliseconds - now) / 1000 / 60 / 60 / 24);
     return dDay;
   };
 
@@ -38,7 +38,7 @@ export default function ProjectCard({ data, id }) {
       <Title onClick={goToDetail}>{data.title}</Title>
       <div>
         <Category>{CATEGORY[data.category]}</Category>
-        <Creator>{data.creator}</Creator>
+        <Creator>{data.creater}</Creator>
       </div>
       <Description>{data.summary}</Description>
       <ProgressWrapper>
@@ -47,7 +47,7 @@ export default function ProjectCard({ data, id }) {
           <CurrentAmount>
             {Math.floor(data['funding_amount']).toLocaleString()}원
           </CurrentAmount>
-          <AmountPercent>{countProgressPercent()}%</AmountPercent>
+          <AmountPercent>{Math.floor(countProgressPercent())}%</AmountPercent>
           <DdayCount>
             <i className="far fa-clock" />
             {countDday()}일 남음

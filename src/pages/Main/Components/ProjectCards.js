@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Button from '../../../components/Button/Button';
 import ProjectCard from '../../../components/ProjectCard/ProjectCard';
 import { useFilterContext } from '../Main';
+import { API } from '../../../config';
 import styled from 'styled-components/macro';
 
 const SORT = [
@@ -31,22 +32,20 @@ export default function ProjectCards({ getFilteredData }) {
   const nextCount = useRef(6);
 
   useEffect(() => {
-    fetch(`/data/Main/MainData${clickedSortOption.url}.json`)
+    fetch(API.MAIN)
       .then(res => res.json())
-      .then(({ projects }) =>
-        setMainData(projects.slice(0, nextCount.current))
-      );
+      .then(res => setMainData(res.data.projects.slice(0, nextCount.current)));
   }, [clickedSortOption]);
 
   const getMoreData = () => {
-    fetch(`/data/Main/MainData${clickedSortOption.url}.json`)
+    fetch(API.MAIN)
       .then(res => res.json())
-      .then(({ projects }) => {
-        if (mainData.length === projects.length) {
+      .then(res => {
+        if (mainData.length === res.length) {
           alert('더이상 불러올 데이터가 없습니다');
           return;
         }
-        const moreData = projects.slice(
+        const moreData = res.data.projects.slice(
           nextCount.current,
           nextCount.current + 6
         );
