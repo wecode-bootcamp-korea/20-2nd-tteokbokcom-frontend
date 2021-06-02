@@ -4,7 +4,7 @@ import { lighten } from 'polished';
 import { useEditorContext } from '../../ProjectStart';
 
 export default function ProjectTag() {
-  const { form, setForm, preventPost } = useEditorContext();
+  const { form, setForm } = useEditorContext();
 
   const handleInput = e => {
     const { value, name } = e.target;
@@ -20,7 +20,6 @@ export default function ProjectTag() {
     let isAlerted = false;
     value.split(/\s*,\s*/).forEach(el => {
       if (el.length < 2) {
-        preventPost();
         if (!isAlerted) {
           alert('최소 2자 이상 입력해주세요');
           isAlerted = true;
