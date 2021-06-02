@@ -36,10 +36,10 @@ export default function ProjectCard({ data, id }) {
         <img alt={`${data.title}이미지`} src={data['title_image_url']} />
       </Thumbnail>
       <Title onClick={goToDetail}>{data.title}</Title>
-      <div>
+      <ProjectInfo>
         <Category>{CATEGORY[data.category]}</Category>
         <Creator>{data.creater}</Creator>
-      </div>
+      </ProjectInfo>
       <Description>{data.summary}</Description>
       <ProgressWrapper>
         <ProgressBar percent={countProgressPercent()} />
@@ -50,7 +50,9 @@ export default function ProjectCard({ data, id }) {
           <AmountPercent>{Math.floor(countProgressPercent())}%</AmountPercent>
           <DdayCount>
             <i className="far fa-clock" />
-            {countDday()}일 남음
+            {countDday() > 0
+              ? countDday() + '일 남음'
+              : '종료된 프로젝트입니다'}
           </DdayCount>
         </ProgressInfo>
       </ProgressWrapper>
@@ -88,17 +90,26 @@ const Thumbnail = styled.div`
 `;
 
 const ProgressWrapper = styled.div`
+  padding: 0 10px;
   ${({ theme }) => theme.flexColumnSet('center', 'flex-start')};
+`;
+
+const ProjectInfo = styled.div`
+  padding: 0 10px;
 `;
 
 const Title = styled.p`
   margin: 15px 0;
+  padding: 0 10px;
   color: ${({ theme }) => theme.colors.black};
   font-weight: 700;
   font-size: ${({ theme }) => theme.calcRem(23)};
   word-break: keep-all;
   line-height: 1.3;
   cursor: pointer;
+  ${({ theme }) => theme.tablet`
+    min-height: ${({ theme }) => theme.calcRem(60)};
+    `};
 `;
 
 const Category = styled.span`
@@ -113,10 +124,13 @@ const Creator = styled(Category)`
 `;
 
 const Description = styled.p`
+  padding: 0 10px;
   margin: 20px 0;
   line-height: 1.4;
   color: ${({ theme }) => theme.colors.black};
-  min-height: ${({ theme }) => theme.calcRem(44)};
+  ${({ theme }) => theme.tablet`
+    min-height:  ${({ theme }) => theme.calcRem(140)};
+  `};
 `;
 
 const ProgressBar = styled.div`
