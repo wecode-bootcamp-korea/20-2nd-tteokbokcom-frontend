@@ -29,7 +29,6 @@ const post_form_data = new FormData();
 
 export default function ProjectStart() {
   const [currentTabNum, setCurrentTabNum] = useState(0);
-  const [isDisabled, setIsDisabled] = useState(false);
   const [randomTitleNum, setRandomTitleNum] = useState(0);
   const [form, setForm] = useState({
     title: '',
@@ -61,31 +60,25 @@ export default function ProjectStart() {
       .catch(err => console.log(err));
   }, []);
 
-  const {
-    title,
-    summary,
-    category,
-    tags,
-    username,
-    introduction,
-    target_fund,
-    launch_date,
-    end_date,
-    reward_one,
-    reward_two,
-    project_img_data,
-    profile_img_data,
-  } = form;
+  //유효성 검사
+  const FIRST_TAB = [
+    'title',
+    'summary',
+    'category',
+    'tags',
+    'username',
+    'introduction',
+    'project_img_data',
+    'profile_img_data',
+  ];
 
-  const checkFirstTabValues =
-    title && summary && category && username && introduction && tags.length > 0;
-
-  const checkSecondTabValues =
-    Object.keys(reward_one).length > 0 &&
-    Object.keys(reward_two).length > 0 &&
-    target_fund &&
-    launch_date &&
-    end_date;
+  const SECOND_TAB = [
+    'target_fund',
+    'launch_date',
+    'end_date',
+    'reward_one',
+    'reward_two',
+  ];
 
   const handleInput = e => {
     const { value, name } = e.target;
@@ -95,30 +88,32 @@ export default function ProjectStart() {
   const clickTabBtn = e => {
     const { name } = e.target;
     setRandomTitleNum(Math.floor(Math.random() * Object.keys(TITLE).length));
-
-    if (name === '0') {
-      setCurrentTabNum(0);
-    }
-
-    if (name === '1') {
-      setCurrentTabNum(1);
-    }
+    setCurrentTabNum(name);
   };
 
-  const preventPost = () => {
-    setIsDisabled(true);
+  const mappingCheckType = v => {
+    const mapper = {
+      [Array]: v => v.length,
+      [Object]: v => Object.keys(v).length,
+      [FormData]: v => [...v.keys()].length,
+    };
+    return mapper[v.constructor] ? mapper[v.constructor](v) : v;
   };
 
-  if (checkFirstTabValues && checkSecondTabValues) {
-    setIsDisabled(false);
-  }
+  const checkValid = (form, keyArr) => {
+    return keyArr.every(key => mappingCheckType(form[key]));
+  };
 
   const postForm = () => {
+    const checkAllValid = Object.keys(form).every(key =>
+      mappingCheckType(form[key])
+    );
+    if (!checkAllValid) return alert('모든 정보를 입력해주세요');
+
+    const { project_img_data, profile_img_data } = form;
     post_form_data.append('info', JSON.stringify(form));
-
-    post_form_data.append('project_img', project_img_data.get('project_img'));
-
-    post_form_data.append('profile_img', profile_img_data.get('profile_img'));
+    post_form_data.append('project_img', project_img_data);
+    post_form_data.append('profile_img', profile_img_data);
 
     fetch('http://10.58.1.179:8000/projects', {
       method: 'POST',
@@ -131,9 +126,9 @@ export default function ProjectStart() {
 
   return (
     <Container>
-      <ContainerTitle isFilled={!!title}>
-        <h1>{title || TITLE[randomTitleNum]}</h1>
-        <WholeSubmitBtn onClick={postForm} disabled={isDisabled}>
+      <ContainerTitle isFilled={!!form.title}>
+        <h1>{form.title || TITLE[randomTitleNum]}</h1>
+        <WholeSubmitBtn onClick={postForm}>
           <i className="fas fa-paper-plane" />
           프로젝트 등록하기
         </WholeSubmitBtn>
@@ -144,7 +139,7 @@ export default function ProjectStart() {
           onClick={clickTabBtn}
           isTabSelected={currentTabNum == 0}
         >
-          <AllExistCheck isAllExists={!!checkFirstTabValues} />
+          <AllExistCheck isAllExists={!!checkValid(form, FIRST_TAB)} />
           프로젝트 개요
         </TabBtn>
         <TabBtn
@@ -152,7 +147,7 @@ export default function ProjectStart() {
           onClick={clickTabBtn}
           isTabSelected={currentTabNum == 1}
         >
-          <AllExistCheck isAllExists={!!checkSecondTabValues} />
+          <AllExistCheck isAllExists={!!checkValid(form, SECOND_TAB)} />
           펀딩 및 선물 구성
         </TabBtn>
       </Tab>
@@ -161,7 +156,6 @@ export default function ProjectStart() {
           form,
           setForm,
           handleInput,
-          preventPost,
         }}
       >
         <EditorWrapper>
@@ -219,10 +213,14 @@ const WholeSubmitBtn = styled.button`
 `;
 
 const Tab = styled.nav`
+  position: sticky;
+  top: 0;
   ${({ theme }) => theme.flexSet()}
   margin-top: 1rem;
   width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.colors.bgGray};
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 5%) 0px 3px 8px -2px;
 `;
 
 const TabBtn = styled.button`

@@ -19,17 +19,16 @@ export default function ImgUploader({ type, width, height, accept }) {
     const { name } = e.target;
 
     if (name === 'project_img') {
-      project_img.append(name, uploadRef.current.files[0]);
       setForm({
         ...form,
-        project_img_data: project_img,
+        project_img_data: uploadRef.current.files[0],
       });
     }
+
     if (name === 'profile_img') {
-      profile_img.append(name, uploadRef.current.files[0]);
       setForm({
         ...form,
-        profile_img_data: profile_img,
+        profile_img_data: uploadRef.current.files[0],
       });
     }
   };
