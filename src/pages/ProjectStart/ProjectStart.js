@@ -1,4 +1,5 @@
 import React, { useState, createContext, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import ProjectStartCard from './Components/ProjectStartCard';
 import projectStartData from './data/projectStartData';
 import { API } from '../../config';
@@ -28,6 +29,7 @@ const TITLE = {
 const post_form_data = new FormData();
 
 export default function ProjectStart() {
+  const history = useHistory();
   const [currentTabNum, setCurrentTabNum] = useState(0);
   const [randomTitleNum, setRandomTitleNum] = useState(0);
   const [form, setForm] = useState({
@@ -46,15 +48,18 @@ export default function ProjectStart() {
     profile_img_data: {},
   });
 
-  //유저 정보 받아와서 입력 폼에 입히기
   useEffect(() => {
-    fetch('http://10.58.1.179:8000/projects')
+    fetch(API.USER, {
+      headers: {
+        Authorization: localStorage.getItem('token'),
+      },
+    })
       .then(res => res.json())
       .then(res =>
         setForm({
           ...form,
-          username: res['user_info']?.creater,
-          introduction: res['user_info']?.introduction,
+          username: res.data.user.username,
+          introduction: res.data.user.introduction,
         })
       )
       .catch(err => console.log(err));
@@ -115,12 +120,16 @@ export default function ProjectStart() {
     post_form_data.append('project_img', project_img_data);
     post_form_data.append('profile_img', profile_img_data);
 
-    fetch('http://10.58.1.179:8000/projects', {
+    fetch(API.PROJECT_START, {
       method: 'POST',
+      headers: {
+        Authorization: localStorage.getItem('token'),
+      },
       body: post_form_data,
     })
       .then(res => res.json())
-      .then(res => console.log(res))
+      .then(alert('등록 성공!'))
+      .then(history.push('/'))
       .catch(err => console.log(err));
   };
 

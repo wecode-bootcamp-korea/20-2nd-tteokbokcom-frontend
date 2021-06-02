@@ -32,12 +32,7 @@ const PROJECT_START_DATA = [
             description:
               '대표 이미지는 프로젝트의 가장 중요한 시각적 요소입니다. \n  후원자들이 프로젝트의 내용을 쉽게 파악하고 좋은 인상을 받을 수 있게 하기 위해 다음 가이드라인에 따라 디자인해 주세요.',
             inputComponent: (
-              <ImgUploader
-                type="project_img"
-                width="1240"
-                height="930"
-                accept=".jpg, .png"
-              />
+              <ImgUploader type="project_img" width="1240" height="930" />
             ),
           },
           {
@@ -77,12 +72,7 @@ const PROJECT_START_DATA = [
             description:
               '창작자님 개인이나 팀의 사진을 올려주세요. \n  얼굴이 나온 사진을 넣으면 프로젝트의 신뢰성 향상에 도움이 됩니다.',
             inputComponent: (
-              <ImgUploader
-                type="profile_img"
-                width="200"
-                height="200"
-                accept=".jpg, .png, .gif"
-              />
+              <ImgUploader type="profile_img" width="200" height="200" />
             ),
           },
           {
