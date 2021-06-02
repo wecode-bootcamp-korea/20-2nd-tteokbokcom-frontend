@@ -1,7 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 import RewardContents from './RewardContents';
 import RewardContentsMobile from './RewardContentsMobile';
+import styled from 'styled-components';
 
 function DetailProduct({
   detailInfo,
@@ -26,7 +26,7 @@ function DetailProduct({
             <CreatorTitle>
               <img
                 alt="profileImage"
-                src={`${!!detailInfo.creater_profile_image} && ../../../images/user.png`}
+                src={`${detailInfo.creater_profile_image} || ../../../images/user.png`}
               />
               <p>{detailInfo.creater}</p>
             </CreatorTitle>
