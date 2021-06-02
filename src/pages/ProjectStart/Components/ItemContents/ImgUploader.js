@@ -4,10 +4,7 @@ import { useEditorContext } from '../../ProjectStart';
 import Button from '../../../../components/Button/Button';
 import styled from 'styled-components/macro';
 
-const project_img = new FormData();
-const profile_img = new FormData();
-
-export default function ImgUploader({ type, width, height, accept }) {
+export default function ImgUploader({ type, width, height }) {
   const uploadRef = useRef();
   const { form, setForm } = useEditorContext();
   const [uploadedImg, setUploadedImg] = useState('파일을 선택해주세요');
@@ -36,11 +33,11 @@ export default function ImgUploader({ type, width, height, accept }) {
   return (
     <Upload>
       <UploadNotice>
-        파일 형식은 {accept}로, 사이즈는 가로 {width}px, 세로 {height}
+        파일 형식은 jpg로, 사이즈는 가로 {width}px, 세로 {height}
         px 이상으로 올려주세요.
       </UploadNotice>
       <UploadNotice>{uploadedImg || '파일을 선택해주세요'}</UploadNotice>
-      <Uploader ref={uploadRef} type="file" name="file" accept={accept} />
+      <Uploader ref={uploadRef} type="file" name="file" accept=".jpg" />
       <Button onClick={handleImgUpload} name={type} color="blue">
         파일 올리기
       </Button>
