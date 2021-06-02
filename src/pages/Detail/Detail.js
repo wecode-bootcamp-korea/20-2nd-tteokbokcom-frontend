@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
-import { API } from '../../config';
+import { useParams } from 'react-router-dom';
 import DetailIntroduction from './DetailIntroduction';
 import DetailNav from './DetailNav';
 import DetailProduct from './DetailProduct';
+import { API } from '../../config';
 import validator from '../../utills/validator';
 
 function Detail() {

@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
 import Button from '../../components/Button/Button';
 import { API } from '../../config';
+import styled from 'styled-components';
 
 function DetailIntroduction({ detailInfo, activeReward, activeScrollBtn }) {
   const leftDays = () => {
-    const oneDay = 1000 * 60 * 60 * 12;
     const lastDayMillisec = new Date(detailInfo.end_date).getTime();
     const now = Date.now();
-    const leftDay = Math.abs(Math.floor((lastDayMillisec - now) / oneDay));
+    const leftDay = Math.floor((lastDayMillisec - now) / 1000 / 60 / 60 / 24);
     return leftDay;
   };
 
@@ -47,7 +46,7 @@ function DetailIntroduction({ detailInfo, activeReward, activeScrollBtn }) {
         <CreatorProfile>
           <img
             alt="profileImage"
-            src={`${!!detailInfo.creater_profile_image} && ../../../images/user.png`}
+            src={`${detailInfo.creater_profile_image} || ../../../images/user.png`}
           />
           <p>{detailInfo.creater}</p>
         </CreatorProfile>
@@ -64,7 +63,7 @@ function DetailIntroduction({ detailInfo, activeReward, activeScrollBtn }) {
           </CollectedAmount>
           <LeftDate>
             <p>남은시간</p>
-            <h2>{leftDays()}일</h2>
+            <h2>{leftDays() < 0 ? '종료되었습니다.' : `${leftDays()}일`}</h2>
           </LeftDate>
           <Sponsor>
             <p>후원자</p>
@@ -298,9 +297,6 @@ const LikeBtn = styled.button`
   line-height: 50px;
   text-align: center;
   font-size: 1.7em;
-  /* &:hover {
-    color: ${({ theme }) => theme.colors['red']};
-  } */
 `;
 
 const ShareBtn = styled.button`
