@@ -30,7 +30,7 @@ const Container = styled.div`
   `};
 
   ${({ theme }) => theme.desktop`
-    width: 40%;
+    width: 60%;
   `};
 `;
 
