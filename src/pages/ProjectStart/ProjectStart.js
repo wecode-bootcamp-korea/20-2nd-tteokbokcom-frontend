@@ -83,6 +83,7 @@ export default function ProjectStart() {
         })
       )
       .catch(err => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleInput = e => {
@@ -131,7 +132,7 @@ export default function ProjectStart() {
         <TabBtn
           name="0"
           onClick={clickTabBtn}
-          isTabSelected={currentTabNum == 0}
+          isTabSelected={+currentTabNum === 0}
         >
           <AllExistCheck isAllExists={!!checkValid(form, FIRST_TAB)} />
           프로젝트 개요
@@ -139,7 +140,7 @@ export default function ProjectStart() {
         <TabBtn
           name="1"
           onClick={clickTabBtn}
-          isTabSelected={currentTabNum == 1}
+          isTabSelected={+currentTabNum === 1}
         >
           <AllExistCheck isAllExists={!!checkValid(form, SECOND_TAB)} />
           펀딩 및 선물 구성

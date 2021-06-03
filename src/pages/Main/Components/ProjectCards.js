@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Button from '../../../components/Button/Button';
 import ProjectCard from '../../../components/ProjectCard/ProjectCard';
-import { useFilterContext } from '../Main';
 import { API } from '../../../config';
 import styled from 'styled-components/macro';
 
@@ -25,20 +24,23 @@ const SORT = [
 ];
 
 export default function ProjectCards({ getFilteredData }) {
-  const { filterOption } = useFilterContext();
   const [mainData, setMainData] = useState([]);
   const [isOpened, setIsOpened] = useState(false);
   const [clickedSortOption, setClickedSortOption] = useState(SORT[0]);
   const nextCount = useRef(6);
 
   useEffect(() => {
-    fetch(API.MAIN)
+    fetch(API.MAIN, {
+      headers: { Authorization: localStorage.getItem('token') },
+    })
       .then(res => res.json())
       .then(res => setMainData(res.data.projects.slice(0, nextCount.current)));
   }, [clickedSortOption]);
 
   const getMoreData = () => {
-    fetch(API.MAIN)
+    fetch(API.MAIN, {
+      headers: { Authorization: localStorage.getItem('token') },
+    })
       .then(res => res.json())
       .then(res => {
         if (mainData.length === res.length) {
@@ -89,7 +91,7 @@ export default function ProjectCards({ getFilteredData }) {
       </ResultCounter>
       <CardContainer>
         {mainData.map(data => (
-          <ProjectCard data={data} key={data.id} id={data.id + 60} />
+          <ProjectCard data={data} key={data.id} id={data.id} />
         ))}
       </CardContainer>
       <MoreContainer>

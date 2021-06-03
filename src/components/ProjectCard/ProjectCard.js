@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { API } from '../../config';
 import styled from 'styled-components/macro';
 
 const CATEGORY = {
@@ -12,6 +13,7 @@ const CATEGORY = {
 
 export default function ProjectCard({ data, id }) {
   const history = useHistory();
+  const [likeStatus, setLikeStatus] = useState(data['is_liked']);
 
   const countDday = () => {
     const endMilliseconds = new Date(data['end_date']).getTime();
@@ -30,10 +32,34 @@ export default function ProjectCard({ data, id }) {
     history.push(`detail/${id}`);
   };
 
+  const patchLikeProject = () => {
+    fetch(`${API.PROJECT_START}/${id}`, {
+      method: 'PATCH',
+      headers: { Authorization: localStorage.getItem('token') },
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error();
+        }
+      })
+      .then(res => {
+        res['is_liked'] ? setLikeStatus(true) : setLikeStatus(false);
+      })
+      .catch(err => alert('로그인을 먼저 해주세요.'));
+  };
+
   return (
     <Container>
-      <Thumbnail onClick={goToDetail}>
-        <img alt={`${data.title}이미지`} src={data['title_image_url']} />
+      <Thumbnail>
+        <LikeIcon onClick={patchLikeProject} className="far fa-heart" />
+        <AlreadyLikeIcon status={likeStatus} className="fas fa-heart" />
+        <img
+          alt={`${data.title}이미지`}
+          src={data['title_image_url']}
+          onClick={goToDetail}
+        />
       </Thumbnail>
       <Title onClick={goToDetail}>{data.title}</Title>
       <ProjectInfo>
@@ -71,10 +97,11 @@ const Container = styled.div`
 `;
 
 const Thumbnail = styled.div`
+  position: relative;
+  width: 100%;
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
-  width: 100%;
 
   & img {
     width: 100%;
@@ -172,4 +199,19 @@ const DdayCount = styled.span`
   & > i {
     margin-right: 5px;
   }
+`;
+
+const LikeIcon = styled.i`
+  position: absolute;
+  z-index: 10;
+  top: 10px;
+  right: 10px;
+  font-size: ${({ theme }) => theme.calcRem(30)};
+  color: white;
+`;
+
+const AlreadyLikeIcon = styled(LikeIcon)`
+  display: ${({ status }) => (status ? 'block' : 'none')};
+  z-index: 1;
+  color: ${({ theme }) => theme.colors.red};
 `;
