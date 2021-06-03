@@ -38,7 +38,7 @@ function RewardCard({
     const isLogin = localStorage.getItem('token');
     if (true || isLogin) {
       alert('후원에 성공했습니다.');
-      history.push('/me');
+      history.push('/profile');
     }
   };
 
