@@ -79,7 +79,6 @@ export default function ProjectStart() {
         setForm({
           ...form,
           username: res.data.user.username,
-          introduction: res.data.user.introduction,
         })
       )
       .catch(err => console.log(err));
