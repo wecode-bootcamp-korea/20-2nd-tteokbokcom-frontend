@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import { API } from '../../config';
 import styled from 'styled-components';
 
-function DetailIntroduction({ detailInfo, activeReward }) {
+function DetailIntroduction({
+  detailInfo,
+  activeReward,
+  showReward,
+  isMobile,
+}) {
   const [fillHeart, setFillHeart] = useState(detailInfo.is_liked);
   const params = useParams();
   const profile_img = detailInfo.creater_profile_image;
+
+  const focusOnReward = e => {
+    window.scrollTo({ top: 1000, behavior: 'smooth' });
+  };
 
   const leftDays = () => {
     const lastDayMillisec = new Date(detailInfo.end_date).getTime();
@@ -90,7 +99,11 @@ function DetailIntroduction({ detailInfo, activeReward }) {
         </ProjectStatus>
         <ProjectButtons>
           <PushThisProjectBtn>
-            <Button color="red" fullWidth onClick={activeReward}>
+            <Button
+              color="red"
+              fullWidth
+              onClick={isMobile ? activeReward : focusOnReward}
+            >
               프로젝트 밀어주기
             </Button>
           </PushThisProjectBtn>

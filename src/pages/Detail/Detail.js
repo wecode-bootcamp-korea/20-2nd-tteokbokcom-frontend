@@ -8,23 +8,32 @@ import validator from '../../utills/validator';
 
 function Detail() {
   const [detailInfo, setDetailInfo] = useState({});
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1080);
   const [showReward, setShowReward] = useState(false);
+  const [closeReward, setCloseReward] = useState(false);
   const params = useParams();
-  const { id } = params;
 
   useEffect(() => {
-    fetch(`${API.MAIN}/${id}`, {
-      headers: { Authorization: localStorage.getItem('token') },
-    })
+    fetch(`${API.PROJECT_START}/${params.id}`)
       .then(res => res.json())
       .then(res => {
         setDetailInfo(res.result);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('resize', mobileResize);
+    return () => {
+      window.removeEventListener('resize', mobileResize);
+    };
   }, []);
 
   const activeReward = () => {
     setShowReward(!showReward);
+  };
+
+  const mobileResize = () => {
+    setIsMobile(!isMobile);
   };
 
   if (validator.isEmptyObject(detailInfo)) return <div>Loading...</div>;
@@ -36,12 +45,16 @@ function Detail() {
         showReward={showReward}
         setShowReward={setShowReward}
         activeReward={activeReward}
+        isMobile={isMobile}
       />
       <DetailNav />
       <DetailProduct
         detailInfo={detailInfo}
         showReward={showReward}
         setShowReward={setShowReward}
+        isMobile={isMobile}
+        closeReward={closeReward}
+        setCloseReward={setCloseReward}
         activeReward={activeReward}
       />
     </>
