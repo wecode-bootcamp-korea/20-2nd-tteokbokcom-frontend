@@ -19,6 +19,7 @@ function Detail() {
       .then(res => {
         setDetailInfo(res.result);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -26,6 +27,7 @@ function Detail() {
     return () => {
       window.removeEventListener('resize', mobileResize);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const activeReward = () => {
