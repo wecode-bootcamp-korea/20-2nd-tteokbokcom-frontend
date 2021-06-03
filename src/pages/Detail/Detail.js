@@ -14,7 +14,11 @@ function Detail() {
   const params = useParams();
 
   useEffect(() => {
-    fetch(`${API.PROJECT_START}/${params.id}`)
+    fetch(`${API.PROJECT}/${params.id}`, {
+      headers: {
+        Authorization: localStorage.getItem('token'),
+      },
+    })
       .then(res => res.json())
       .then(res => {
         setDetailInfo(res.result);

@@ -102,6 +102,9 @@ function Nav() {
                   <Link to="/profile">🍄 마이페이지</Link>
                 </li>
                 <li onClick={handleLogout}>👋 로그아웃</li>
+                <li>
+                  <Link to="/project-start">📕 프로젝트 올리기</Link>
+                </li>
               </MenuWrapper>
             </ToggleMenu>
           </SearchAndLogin>
@@ -169,10 +172,6 @@ const MenuWrapper = styled.ul`
     ${({ theme }) => theme.desktop`
       width: 100px;
     `};
-
-    &:last-of-type {
-      margin-top: 0;
-    }
   }
 
   & a {

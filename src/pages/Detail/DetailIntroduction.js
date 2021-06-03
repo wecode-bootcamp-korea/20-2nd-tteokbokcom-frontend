@@ -32,7 +32,7 @@ function DetailIntroduction({
   };
 
   const sendLike = e => {
-    fetch(`${API.MAIN}/${params.id}`, {
+    fetch(`${API.PROJECT}/${params.id}`, {
       method: 'PATCH',
       headers: { Authorization: localStorage.getItem('token') },
     }).then(res => {
@@ -68,7 +68,7 @@ function DetailIntroduction({
           <span>{categoryToKorean(detailInfo.category)}</span>
         </CategoryTitle>
         <ProjectTitle>
-          <h1>{detailInfo.title}</h1>
+          <p>{detailInfo.title}</p>
         </ProjectTitle>
         <CreatorProfile>
           <img
@@ -108,7 +108,7 @@ function DetailIntroduction({
             </Button>
           </PushThisProjectBtn>
           <LikeBtn onClick={sendLike} fillHeart={fillHeart}>
-            <i class="fas fa-heart"></i>
+            <i className="fas fa-heart"></i>
           </LikeBtn>
           <ShareBtn>
             <i className="fas fa-share-alt"></i>

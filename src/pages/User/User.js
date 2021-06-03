@@ -29,7 +29,7 @@ function User() {
   );
 
   const getLikeList = () => {
-    fetch(`${API.MAIN}?liked`, {
+    fetch(`${API.PROJECT}?liked`, {
       headers: { Authorization: localStorage.getItem('token') },
     })
       .then(res => res.json())
@@ -37,7 +37,7 @@ function User() {
   };
 
   const getPushList = () => {
-    fetch(`${API.MAIN}?donated`, {
+    fetch(`${API.PROJECT}?donated`, {
       headers: { Authorization: localStorage.getItem('token') },
     })
       .then(res => res.json())
