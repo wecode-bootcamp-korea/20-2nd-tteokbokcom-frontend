@@ -46,8 +46,6 @@ const SECOND_TAB = [
   'reward_two',
 ];
 
-const post_form_data = new FormData();
-
 export default function ProjectStart() {
   const history = useHistory();
   const [currentTabNum, setCurrentTabNum] = useState(0);
@@ -97,6 +95,7 @@ export default function ProjectStart() {
   };
 
   const postForm = () => {
+    const post_form_data = new FormData();
     const checkAllValid = checkValid(form, Object.keys(form));
     if (!checkAllValid) return alert('모든 정보를 입력해주세요');
 
