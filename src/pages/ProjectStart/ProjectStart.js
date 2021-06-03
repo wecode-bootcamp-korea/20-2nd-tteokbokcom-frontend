@@ -104,7 +104,7 @@ export default function ProjectStart() {
     post_form_data.append('project_img', project_img_data);
     post_form_data.append('profile_img', profile_img_data);
 
-    fetch(API.PROJECT_START, {
+    fetch(API.PROJECT, {
       method: 'POST',
       headers: {
         Authorization: localStorage.getItem('token'),
@@ -119,6 +119,8 @@ export default function ProjectStart() {
 
   return (
     <Container>
+      <WarningTxt>ver 1.0 | 두 탭의 모든 항목을 입력하셔야 합니다</WarningTxt>
+      <WarningTxt>모든 입력 내용은 자동 저장됩니다 :)</WarningTxt>
       <ContainerTitle isFilled={!!form.title}>
         <h1>{form.title || TITLE[randomTitleNum]}</h1>
         <WholeSubmitBtn onClick={postForm}>
@@ -172,6 +174,12 @@ export default function ProjectStart() {
 const Container = styled.div`
   ${({ theme }) => theme.flexColumnSet()};
   margin-top: 2rem;
+`;
+
+const WarningTxt = styled.p`
+  margin-top: 5px;
+  color: ${({ theme }) => theme.colors.red};
+  font-size: ${({ theme }) => theme.calcRem(13)};
 `;
 
 const EditorWrapper = styled.section`

@@ -33,7 +33,7 @@ export default function ProjectCard({ data, id }) {
   };
 
   const patchLikeProject = () => {
-    fetch(`${API.PROJECT_START}/${id}`, {
+    fetch(`${API.PROJECT}/${id}`, {
       method: 'PATCH',
       headers: { Authorization: localStorage.getItem('token') },
     })

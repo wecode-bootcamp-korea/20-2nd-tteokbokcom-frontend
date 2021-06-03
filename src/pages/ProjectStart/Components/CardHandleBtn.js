@@ -6,7 +6,7 @@ export default function CardHandleBtn({ toggleEditor }) {
   return (
     <ButtonWrapper>
       <Button color="red" onClick={toggleEditor}>
-        <Icon className="fas fa-times" /> 저장 후 닫기
+        <Icon className="fas fa-times" /> 닫기
       </Button>
     </ButtonWrapper>
   );

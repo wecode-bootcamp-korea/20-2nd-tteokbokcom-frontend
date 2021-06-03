@@ -25,7 +25,7 @@ export default function ProjectCards({ getFilteredData }) {
 
   //처음 마운트시 받는 데이터
   useEffect(() => {
-    fetch(API.MAIN, {
+    fetch(API.PROJECT, {
       headers: { Authorization: localStorage.getItem('token') },
     })
       .then(res => res.json())
@@ -44,7 +44,7 @@ export default function ProjectCards({ getFilteredData }) {
 
   //이동한 url에서 데이터 정보를 받아와서 fetch
   useEffect(() => {
-    fetch(`${API.MAIN}${location.search}`)
+    fetch(`${API.PROJECT}${location.search}`)
       .then(res => res.json())
       .then(res =>
         setMainData(res.data.projects.slice(0, nextCountRef.current))
@@ -53,7 +53,7 @@ export default function ProjectCards({ getFilteredData }) {
 
   // To Do : 백엔드 통신 때 연결 테스트
   const getMoreData = () => {
-    fetch(`${API.MAIN}${location.search}`, {
+    fetch(`${API.PROJECT}${location.search}`, {
       headers: { Authorization: localStorage.getItem('token') },
     })
       .then(res => res.json())
@@ -80,7 +80,7 @@ export default function ProjectCards({ getFilteredData }) {
 
   //이동한 url에서 데이터 정보를 받아와서 fetch
   useEffect(() => {
-    fetch(`${API.MAIN}${location.search}`, {
+    fetch(`${API.PROJECT}${location.search}`, {
       headers: { Authorization: localStorage.getItem('token') },
     })
       .then(res => res.json())
