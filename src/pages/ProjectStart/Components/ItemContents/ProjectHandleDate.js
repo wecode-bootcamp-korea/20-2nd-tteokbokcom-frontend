@@ -22,7 +22,7 @@ const Editor = styled.section`
 const Scheduling = styled.input`
   all: unset;
   padding: 5px;
-  width: 20%;
+  width: 40%;
   border: 2px solid ${lighten(0.3, '#3a6ff2')};
   border-radius: 4px;
   background-color: white;
@@ -31,6 +31,10 @@ const Scheduling = styled.input`
   &:focus {
     border-color: #3a6ff2;
   }
+
+  ${({ theme }) => theme.tablet`
+    width: 25%;
+  `};
 `;
 
 const ScheduleText = styled.span`

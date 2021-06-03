@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import ProjectStartCard from './Components/ProjectStartCard';
 import projectStartData from './data/projectStartData';
 import { API } from '../../config';
+import checkValid from '../../utils/checkValid';
 import styled from 'styled-components/macro';
 
 const EditorContext = createContext();
@@ -25,6 +26,25 @@ const TITLE = {
   12: '귀여운 제목',
   13: '감동적인 제목',
 };
+
+const FIRST_TAB = [
+  'title',
+  'summary',
+  'category',
+  'tags',
+  'username',
+  'introduction',
+  'project_img_data',
+  'profile_img_data',
+];
+
+const SECOND_TAB = [
+  'target_fund',
+  'launch_date',
+  'end_date',
+  'reward_one',
+  'reward_two',
+];
 
 const post_form_data = new FormData();
 
@@ -65,26 +85,6 @@ export default function ProjectStart() {
       .catch(err => console.log(err));
   }, []);
 
-  //유효성 검사
-  const FIRST_TAB = [
-    'title',
-    'summary',
-    'category',
-    'tags',
-    'username',
-    'introduction',
-    'project_img_data',
-    'profile_img_data',
-  ];
-
-  const SECOND_TAB = [
-    'target_fund',
-    'launch_date',
-    'end_date',
-    'reward_one',
-    'reward_two',
-  ];
-
   const handleInput = e => {
     const { value, name } = e.target;
     setForm({ ...form, [name]: value });
@@ -96,23 +96,8 @@ export default function ProjectStart() {
     setCurrentTabNum(name);
   };
 
-  const mappingCheckType = v => {
-    const mapper = {
-      [Array]: v => v.length,
-      [Object]: v => Object.keys(v).length,
-      [FormData]: v => [...v.keys()].length,
-    };
-    return mapper[v.constructor] ? mapper[v.constructor](v) : v;
-  };
-
-  const checkValid = (form, keyArr) => {
-    return keyArr.every(key => mappingCheckType(form[key]));
-  };
-
   const postForm = () => {
-    const checkAllValid = Object.keys(form).every(key =>
-      mappingCheckType(form[key])
-    );
+    const checkAllValid = checkValid(form, Object.keys(form));
     if (!checkAllValid) return alert('모든 정보를 입력해주세요');
 
     const { project_img_data, profile_img_data } = form;
