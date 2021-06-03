@@ -20,6 +20,7 @@ export default function ProjectCards({ getFilteredData }) {
   const [mainData, setMainData] = useState([]);
   const [isOpened, setIsOpened] = useState(false);
   const [sortBtnValue, setSortBtnValue] = useState('최신순');
+  const [projectsCount, setProjectsCount] = useState(0);
   const nextCountRef = useRef(6);
 
   //처음 마운트시 받는 데이터
@@ -28,9 +29,10 @@ export default function ProjectCards({ getFilteredData }) {
       headers: { Authorization: localStorage.getItem('token') },
     })
       .then(res => res.json())
-      .then(res =>
-        setMainData(res.data.projects.slice(0, nextCountRef.current))
-      );
+      .then(res => {
+        setMainData(res.data.projects.slice(0, nextCountRef.current));
+        setProjectsCount(res.data.num_projects);
+      });
   }, []);
 
   //옵션 클릭 시 페이지 이동
@@ -112,7 +114,7 @@ export default function ProjectCards({ getFilteredData }) {
     <section>
       <ResultCounter>
         <span>
-          <ProjectCounter>{mainData.length}</ProjectCounter>개의 프로젝트가
+          <ProjectCounter>{projectsCount}</ProjectCounter>개의 프로젝트가
           있습니다.
         </span>
         <button onClick={openSortMenu}>
