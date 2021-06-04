@@ -11,6 +11,7 @@ function RewardCard({
   project_id,
   option_id,
   remains,
+  title,
 }) {
   const [activePush, setActivePush] = useState(false);
   const history = useHistory();
@@ -50,9 +51,10 @@ function RewardCard({
             <i className="fas fa-check"></i>
             {selected_funding}명이 선택
           </SelectedNumb>
-          <div>{remains}개 남음</div>
+          {remains && <div>{remains}개 남음</div>}
         </SelectedNumbBox>
         <h2>{amount}원 + </h2>
+        <h3>{title}</h3>
         <p>{description}</p>
       </EachRewardCard>
       {activePush && (
@@ -77,13 +79,17 @@ const EachRewardCard = styled.div`
 
   h2 {
     margin-bottom: 5px;
-    font-size: 24px;
+    font-size: ${({ theme }) => theme.calcRem(24)};
     font-weight: bold;
     line-height: 36px;
   }
 
+  h3 {
+    font-size: ${({ theme }) => theme.calcRem(15)};
+  }
+
   p {
-    font-size: 13px;
+    font-size: ${({ theme }) => theme.calcRem(13)};
     line-height: 20px;
   }
 

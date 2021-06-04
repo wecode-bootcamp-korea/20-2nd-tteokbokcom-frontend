@@ -8,6 +8,7 @@ function RewardContent({ funding_option, project_id }) {
       {funding_option.map(input => {
         return (
           <RewardCard
+            title={input.title}
             id={input.id}
             project_id={project_id}
             key={input.option_id}
