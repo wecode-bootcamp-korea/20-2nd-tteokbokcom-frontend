@@ -4,7 +4,7 @@ import DetailIntroduction from './DetailIntroduction';
 import DetailNav from './DetailNav';
 import DetailProduct from './DetailProduct';
 import { API } from '../../config';
-import validator from '../../utills/validator';
+import validator from '../../utils/validator';
 
 function Detail() {
   const [detailInfo, setDetailInfo] = useState({});
