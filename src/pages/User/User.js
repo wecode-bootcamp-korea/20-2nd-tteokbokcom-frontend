@@ -61,7 +61,7 @@ function User() {
         />
         <Box>
           {filteredLike.map(item => {
-            return <Item key={item.id} data={item} />;
+            return <Item key={item.id} data={item} id={item.id} />;
           })}
         </Box>
         <Title>내가 후원한 프로젝트</Title>
@@ -73,7 +73,7 @@ function User() {
         />
         <Box>
           {filteredPush?.map(item => {
-            return <Item key={item.id} data={item} />;
+            return <Item key={item.id} data={item} id={item.id} />;
           })}
         </Box>
       </Wrapper>
