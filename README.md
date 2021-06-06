@@ -9,6 +9,9 @@
 > - /project-start : 프로젝트 등록페이지
 > - /profile : 마이페이지
 
+## 💬 프로젝트 개요
+자신만의 아이디어를 프로젝트로 소개하고 후원 (펀딩) 받을 수 있는 사이트
+
 ## 👫 팀원
 
 - FE 3인: [노선경(PM)](velog.io/@celline1637), [송가람](velog.io/@sgr2134), [임유진](velog.io/@1703979)
@@ -20,8 +23,9 @@
 
 ## 🔧 Skills
 
-- FE : React, React Hooks, React Router, Styled-Components, AWS S3
-- BE : Django, Docker, AWS S3
+- FE : React Hooks, React Router, Styled-Component, Lodash
+- BE : Django, Docker, MY SQL
+- Common : KAKAO social login, AWS(EC2,RDS, S3), RESTful API
 
 ## 👍🏻 구현 기능 상세
 
@@ -51,3 +55,8 @@
 
 - 좋아요/후원한 프로젝트 확인
 - 좋아요/후원한 프로젝트 검색 기능
+
+## Reference
+- 이 프로젝트는 텀블벅 사이트를 참조하여 학습목적으로 만들었습니다. 실무수준의 프로젝트이지만 학습용으로 만들었기 때문에 이 코드를 활용하여 이득을 취하거나 무단 배포할 경우 법적으로 문제될 수 있습니다.
+- 이 프로젝트에서 사용하고 있는 사진 대부분은 직접 찍거나 unsplash에서 공유받은 Free 이미지이므로 해당 프로젝트 외부인이 사용할 수 없습니다.
+- 이 프로젝트에서 사용한 로고, 커서 이미지는 직접 제작한 것으로 외부인이 사용할 수 없습니다.
