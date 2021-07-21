@@ -20,6 +20,9 @@ export default function FilterNav() {
   const toggleFilter = e => {
     const name = e.target.getAttribute('name');
     setClickedFilter(name);
+    if (clickedFilter === name) {
+      setClickedFilter('');
+    }
   };
 
   const resetFilter = () => {
@@ -49,7 +52,6 @@ export default function FilterNav() {
                 }
               />
               <FilterWidjet
-                toggleFilter={toggleFilter}
                 condition={key}
                 key={key}
                 clickedFilter={clickedFilter}
@@ -102,6 +104,7 @@ const Filter = styled(Button)`
   ${({ theme }) => theme.tablet`
     font-size: 1rem;
   `};
+
   &:last-of-type {
     margin-right: 0;
   }

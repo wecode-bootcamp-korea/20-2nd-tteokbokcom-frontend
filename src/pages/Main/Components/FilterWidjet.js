@@ -26,6 +26,10 @@ export default function FilterWidjet({ condition, clickedFilter }) {
     amountMax: 0,
   });
 
+  const preventOffWidjet = e => {
+    e.stopPropagation();
+  };
+
   const saveClickedOption = e => {
     const { id } = e.target;
     setFilterOption({ ...filterOption, [condition]: id });
@@ -59,7 +63,10 @@ export default function FilterWidjet({ condition, clickedFilter }) {
   };
 
   return (
-    <Container clickedFilter={clickedFilter === condition}>
+    <Container
+      onClick={preventOffWidjet}
+      clickedFilter={clickedFilter === condition}
+    >
       {(condition === 'progress' || condition === 'amount') && (
         <>
           <FilterOption>
