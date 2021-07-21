@@ -17,12 +17,7 @@ const STATUS = [
   { option: '완료된 프로젝트', id: 'done' },
 ];
 
-export default function FilterWidjet({
-  condition,
-  isClicked,
-  toggleFilter,
-  getFilteredData,
-}) {
+export default function FilterWidjet({ condition, clickedFilter }) {
   const { filterOption, setFilterOption } = useFilterContext();
   const tempRangeRef = useRef({
     progressMin: 0,
@@ -64,7 +59,7 @@ export default function FilterWidjet({
   };
 
   return (
-    <Container isClicked={isClicked}>
+    <Container clickedFilter={clickedFilter === condition}>
       {(condition === 'progress' || condition === 'amount') && (
         <>
           <FilterOption>
@@ -132,7 +127,7 @@ const Container = styled.ul`
   top: 40px;
   left: 0;
   ${({ theme }) => theme.flexColumnSet('center', 'flex-start')};
-  display: ${({ isClicked }) => (isClicked ? 'flex' : 'none')};
+  display: ${({ clickedFilter }) => (clickedFilter ? 'flex' : 'none')};
   width: 200px;
   background-color: white;
   border: 1px solid ${({ theme }) => theme.colors.border};

@@ -15,19 +15,11 @@ const FILTER = [
 export default function FilterNav() {
   const history = useHistory();
   const { setFilterOption } = useFilterContext();
-  const [isFilterOpen, setIsFilterOpen] = useState({
-    category: false,
-    status: false,
-    progress: false,
-    amount: false,
-  });
+  const [clickedFilter, setClickedFilter] = useState('');
 
   const toggleFilter = e => {
     const name = e.target.getAttribute('name');
-    setIsFilterOpen({
-      ...isFilterOpen,
-      [name]: !isFilterOpen[name],
-    });
+    setClickedFilter(name);
   };
 
   const resetFilter = () => {
@@ -51,14 +43,16 @@ export default function FilterNav() {
               {value}
               <i
                 className={
-                  isFilterOpen[key] ? 'fas fa-angle-up' : 'fas fa-angle-down'
+                  clickedFilter === key
+                    ? 'fas fa-angle-up'
+                    : 'fas fa-angle-down'
                 }
               />
               <FilterWidjet
                 toggleFilter={toggleFilter}
                 condition={key}
                 key={key}
-                isClicked={isFilterOpen[key]}
+                clickedFilter={clickedFilter}
               />
             </Filter>
           ))}
@@ -114,5 +108,6 @@ const Filter = styled(Button)`
 
   & > i {
     margin: 0 5px;
+    pointer-events: none;
   }
 `;
