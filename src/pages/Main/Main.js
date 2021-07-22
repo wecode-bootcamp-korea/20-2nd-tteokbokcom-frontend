@@ -31,10 +31,10 @@ export default function Main() {
 
 const Container = styled.section`
   ${({ theme }) => theme.flexColumnSet()};
-  width: 100%;
 `;
 
 const Wrapper = styled.section`
+  width: 100%;
   ${({ theme }) => theme.desktop`
     width: 70%;
   `};
